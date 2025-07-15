@@ -1,8 +1,36 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { ChevronRight, Lock, Users, Zap, Target, Mail, Phone, User, CheckCircle, XCircle } from 'lucide-react';
-import {Answers, Dot, Question, QuestionOption} from "@/lib/types";
+import { ChevronRight, Lock, Mail, Phone, User, CheckCircle, XCircle } from 'lucide-react';
+import Image from "next/image";
+
+interface Dot {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  opacity: number;
+  speedX: number;
+  speedY: number;
+}
+
+interface Question {
+  id: number;
+  text: string;
+  subtitle?: string;
+  options: QuestionOption[];
+  multiSelect?: boolean;
+}
+
+interface QuestionOption {
+  text: string;
+  value: string;
+  disqualifies?: boolean;
+  qualifies?: boolean;
+  points?: number;
+}
+
+type Answers = Record<number, string | string[]>;
 
 const Home = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -17,15 +45,15 @@ const Home = () => {
 
   useEffect(() => {
     const newDots = [];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 30; i++) {
       newDots.push({
         id: i,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        size: Math.random() * 4 + 1,
-        opacity: Math.random() * 0.5 + 0.1,
-        speedX: (Math.random() - 0.5) * 0.5,
-        speedY: (Math.random() - 0.5) * 0.5
+        size: Math.random() * 3 + 1,
+        opacity: Math.random() * 0.3 + 0.1,
+        speedX: (Math.random() - 0.5) * 0.3,
+        speedY: (Math.random() - 0.5) * 0.3
       });
     }
     setDots(newDots);
@@ -147,7 +175,6 @@ const Home = () => {
   };
 
   const calculateQualification = () => {
-    // Check disqualifying factors
     if (answers[1] === 'under5k') return false;
     if (answers[2] === 'support_staff' || answers[2] === 'freelancer') return false;
     if (answers[3] && answers[3].includes('no_problems')) return false;
@@ -180,97 +207,119 @@ const Home = () => {
   const currentQ = questions.find(({ id }) => currentQuestion === id);
 
   return (
-      <div className="min-h-screen bg-gradient-button text-white overflow-hidden relative">
+      <div className="min-h-screen bg-black text-white overflow-hidden relative">
         {/* Animated Background Dots */}
         <div className="absolute inset-0 overflow-hidden">
           {dots.map(dot => (
               <div
                   key={dot.id}
-                  className="absolute rounded-full bg-magenta"
+                  className="absolute rounded-full"
                   style={{
                     left: `${dot.x}%`,
                     top: `${dot.y}%`,
                     width: `${dot.size}px`,
                     height: `${dot.size}px`,
                     opacity: dot.opacity,
-                    filter: 'blur(0.5px)'
+                    background: 'linear-gradient(135deg, #FEBEFA, #B339D4, #7B21BA)',
+                    filter: 'blur(1px)'
                   }}
               />
           ))}
         </div>
 
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-blue-900/20"></div>
+        {/* Large gradient blurs for atmosphere */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-fuchsia-600/20 via-purple-600/20 to-violet-600/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-violet-600/20 via-purple-600/20 to-fuchsia-600/20 rounded-full blur-3xl"></div>
 
         <div className="relative z-10">
           {!quizCompleted ? (
               <>
                 {/* Hero Section */}
                 {currentQuestion === 0 && (
-                    <div className="container mx-auto px-6 pt-20 pb-16">
+                    <div className="container mx-auto px-6 pt-16 pb-16">
+                      {/* Header with Logo */}
+                      <div className="flex items-center justify-center mb-12">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-12 h-12 relative">
+                            <Image src={'/images/logo.png'} height={48} width={48} alt={'Logo'}/>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-white text-sm font-['Inter'] tracking-widest">Next Level</div>
+                            <div className="text-white text-2xl font-semibold font-['Inter']">Coach AI</div>
+                          </div>
+                        </div>
+                      </div>
+
                       <div className="text-center max-w-6xl mx-auto">
-                        <div className="flex items-center justify-center mb-6">
-                          <span className="text-4xl mr-3">🔥</span>
-                          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-orange-400 to-pink-400 bg-clip-text text-transparent">
-                            Only 100 Coaches Will Get In — Will You Be One of Them?
+                        <div className="flex items-center justify-center mb-8">
+                          <span className="text-5xl mr-4">🔥</span>
+                          <h1 className="text-5xl md:text-7xl font-bold font-['Poppins']">
+                            <span className="text-white">Only 100 Coaches Will Get In — </span>
+                            <span className="bg-gradient-to-r from-fuchsia-200 to-fuchsia-600 bg-clip-text text-transparent">
+                        Will You Be One of Them?
+                      </span>
                           </h1>
                         </div>
 
-                        <div className="flex items-center justify-center mb-8">
-                          <Lock className="w-8 h-8 mr-4 text-yellow-400" />
-                          <h2 className="text-2xl md:text-4xl font-semibold">
+                        <div className="flex items-center justify-center mb-12">
+                          <Lock className="w-8 h-8 mr-4 text-fuchsia-200" />
+                          <h2 className="text-3xl md:text-4xl font-semibold font-['Poppins'] text-white">
                             Access to the Next Level Coach Vault{' '}
-                            <span className="text-magenta-light italic">(exclusive early-access community)</span>
+                            <span className="text-fuchsia-200 italic">(exclusive early-access community)</span>
                           </h2>
                         </div>
 
-                        <p className="text-xl mb-12 max-w-3xl mx-auto">
+                        <p className="text-2xl mb-16 max-w-3xl mx-auto font-['Poppins'] text-white/80">
                           This is not for everyone.
                         </p>
 
-                        <div className="bg-gradient-glass backdrop-blur-lg rounded-2xl p-8 border border-white/20 mb-12">
-                          <p className="text-lg mb-6">
-                            Only the <span className="text-yellow-400 font-bold">first 100 coaches who qualify</span> will be granted access to our private AI Vault — a behind-the-scenes community where you'll:
-                          </p>
+                        <div className="bg-gradient-to-b from-neutral-800/30 to-neutral-900/30 backdrop-blur-lg rounded-[40px] p-12 border-2 border-fuchsia-200 mb-16 relative overflow-hidden">
+                          {/* Glassmorphism background effect */}
+                          <div className="absolute inset-0 bg-gradient-to-b from-black/0 to-black opacity-70"></div>
+                          <div className="relative z-10">
+                            <p className="text-xl mb-8 font-['Poppins'] text-white">
+                              Only the <span className="text-fuchsia-200 font-bold">first 100 coaches who qualify</span> will be granted access to our private AI Vault — a behind-the-scenes community where you'll:
+                            </p>
 
-                          <div className="grid md:grid-cols-3 gap-6 text-left">
-                            <div className="flex items-start space-x-3">
-                              <Zap className="w-6 h-6 text-purple mt-1 flex-shrink-0" />
-                              <span>Be the first to access our software before the public launch</span>
-                            </div>
-                            <div className="flex items-start space-x-3">
-                              <Target className="w-6 h-6 text-blue-400 mt-1 flex-shrink-0" />
-                              <span>Receive insider drops with automation, retention, and scaling strategies</span>
-                            </div>
-                            <div className="flex items-start space-x-3">
-                              <Users className="w-6 h-6 text-green-400 mt-1 flex-shrink-0" />
-                              <span>Join a private circle of elite coaches pioneering the future of AI in coaching</span>
+                            <div className="grid md:grid-cols-3 gap-8 text-left">
+                              <div className="flex items-start space-x-4">
+                                <div className="w-2 h-2 bg-fuchsia-400 rounded-full mt-3 flex-shrink-0"></div>
+                                <span className="text-lg font-['Poppins'] text-white/80">Be the first to access our software before the public launch</span>
+                              </div>
+                              <div className="flex items-start space-x-4">
+                                <div className="w-2 h-2 bg-fuchsia-400 rounded-full mt-3 flex-shrink-0"></div>
+                                <span className="text-lg font-['Poppins'] text-white/80">Receive insider drops with automation, retention, and scaling strategies</span>
+                              </div>
+                              <div className="flex items-start space-x-4">
+                                <div className="w-2 h-2 bg-fuchsia-400 rounded-full mt-3 flex-shrink-0"></div>
+                                <span className="text-lg font-['Poppins'] text-white/80">Join a private circle of elite coaches pioneering the future of AI in coaching</span>
+                              </div>
                             </div>
                           </div>
                         </div>
 
-                        <div className="text-2xl font-bold text-red-400 mb-8">
+                        <div className="text-3xl font-bold text-fuchsia-200 mb-12 font-['Poppins']">
                           Once the 100 spots are gone — they're gone for good.
                         </div>
 
-                        <div className="bg-gradient-to-r from-purple-600/30 to-blue-600/30 rounded-xl p-6 border border-purple/30 mb-8">
-                          <p className="text-lg mb-4">
+                        <div className="bg-gradient-to-b from-neutral-800/30 to-neutral-900/30 rounded-[40px] p-8 border-2 border-fuchsia-200/50 mb-12 backdrop-blur-lg">
+                          <p className="text-xl mb-6 font-['Poppins'] text-white/80">
                             If you're serious about scaling smarter and staying ahead of the curve, this is your moment.
                           </p>
-                          <p className="text-xl font-semibold">
+                          <p className="text-2xl font-semibold font-['Poppins'] text-white">
                             Take the quiz now to see if you qualify.
                           </p>
                         </div>
 
                         <button
                             onClick={() => setCurrentQuestion(1)}
-                            className="bg-gradient-to-t from-fuchsia-200 via-fuchsia-600 to-violet-600 hover:bg-[#8B31CA] hover:opacity-90 cursor-pointer text-white font-bold py-4 px-8 rounded-xl text-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                            className="bg-gradient-to-l from-fuchsia-200 via-fuchsia-600 to-violet-600 hover:opacity-90 cursor-pointer text-white font-bold py-6 px-12 rounded-xl text-2xl transition-all duration-300 transform hover:scale-105 shadow-[0px_2px_12px_0px_rgba(212,151,255,1.00)] font-['Inter']"
                         >
                           Take The Quiz: "What's Your AI Automation Score?"
-                          <ChevronRight className="inline ml-2 w-6 h-6" />
+                          <ChevronRight className="inline ml-3 w-6 h-6" />
                         </button>
 
-                        <p className="text-sm mt-4 text-gray-300">
+                        <p className="text-lg mt-6 text-white/60 font-['Poppins']">
                           Discover where your coaching business is bleeding time, dropping clients, and how AI could boost your income — without hiring another team member.
                         </p>
                       </div>
@@ -281,69 +330,74 @@ const Home = () => {
                 {currentQuestion > 0 && !showLeadForm && (
                     <div className="container mx-auto px-6 py-20">
                       <div className="max-w-4xl mx-auto">
-                        <div className="bg-gradient-glass backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-                          <div className="mb-8">
-                            <div className="flex justify-between items-center mb-4">
-                              <span className="text-magenta-light">Question {currentQuestion} of {questions.length}</span>
-                              <div className="w-32 bg-gray-700 rounded-full h-2">
-                                <div
-                                    className="bg-gradient-to-r from-magenta to-purple h-2 rounded-full transition-all duration-300"
-                                    style={{ width: `${(currentQuestion / questions.length) * 100}%` }}
-                                ></div>
+                        <div className="bg-gradient-to-b from-neutral-800/30 to-neutral-900/30 backdrop-blur-lg rounded-[40px] p-12 border-2 border-fuchsia-200 relative overflow-hidden">
+                          {/* Background blur effects */}
+                          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-l from-fuchsia-200/10 via-fuchsia-600/10 to-violet-600/10 rounded-full blur-3xl"></div>
+
+                          <div className="relative z-10">
+                            <div className="mb-12">
+                              <div className="flex justify-between items-center mb-6">
+                                <span className="text-fuchsia-200 font-['Poppins'] text-lg">Question {currentQuestion} of {questions.length}</span>
+                                <div className="w-48 bg-neutral-700 rounded-full h-3">
+                                  <div
+                                      className="bg-gradient-to-r from-fuchsia-200 via-fuchsia-600 to-violet-600 h-3 rounded-full transition-all duration-500"
+                                      style={{ width: `${(currentQuestion / questions.length) * 100}%` }}
+                                  ></div>
+                                </div>
                               </div>
+
+                              <h2 className="text-3xl md:text-4xl font-bold mb-4 font-['Poppins'] text-white">{currentQ?.text}</h2>
+                              {currentQ?.subtitle && (
+                                  <p className="text-white/70 text-lg font-['Poppins']">{currentQ?.subtitle}</p>
+                              )}
+                              {currentQ?.multiSelect && (
+                                  <p className="text-base text-fuchsia-200 mt-4 font-['Poppins']">Select all that apply</p>
+                              )}
                             </div>
 
-                            <h2 className="text-2xl md:text-3xl font-bold mb-2">{currentQ?.text}</h2>
-                            {currentQ?.subtitle && (
-                                <p className="text-gray-300">{currentQ?.subtitle}</p>
-                            )}
+                            <div className="space-y-6">
+                              {currentQ?.options.map((option, index) => {
+                                const isSelected = currentQ?.multiSelect
+                                    ? (answers[currentQ?.id] || []).includes(option.value)
+                                    : answers[currentQ?.id] === option.value;
+
+                                return (
+                                    <button
+                                        key={index}
+                                        onClick={() => handleAnswer(currentQ?.id, option, currentQ?.multiSelect)}
+                                        className={`w-full p-6 rounded-[20px] border-2 transition-all duration-300 text-left font-['Poppins'] ${
+                                            isSelected
+                                                ? 'border-fuchsia-200 bg-gradient-to-b from-neutral-800/50 to-neutral-900/50 text-white'
+                                                : 'border-neutral-700 bg-gradient-to-b from-neutral-800/30 to-neutral-900/30 hover:border-fuchsia-200/50 hover:bg-gradient-to-b hover:from-neutral-800/50 hover:to-neutral-900/50 text-white/80'
+                                        }`}
+                                    >
+                                      <div className="flex items-center">
+                                        {currentQ?.multiSelect && (
+                                            <div className={`w-6 h-6 rounded border-2 mr-4 flex items-center justify-center ${
+                                                isSelected ? 'bg-fuchsia-600 border-fuchsia-200' : 'border-neutral-500'
+                                            }`}>
+                                              {isSelected && <CheckCircle className="w-4 h-4 text-white" />}
+                                            </div>
+                                        )}
+                                        <span className="text-xl">{option.text}</span>
+                                      </div>
+                                    </button>
+                                );
+                              })}
+                            </div>
+
                             {currentQ?.multiSelect && (
-                                <p className="text-sm text-magenta-light mt-2">Select all that apply</p>
+                                <div className="mt-12 text-center">
+                                  <button
+                                      onClick={handleNextMultiSelect}
+                                      disabled={!answers[currentQ?.id] || answers[currentQ?.id].length === 0}
+                                      className="bg-gradient-to-l from-fuchsia-200 via-fuchsia-600 to-violet-600 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 font-['Inter'] text-lg"
+                                  >
+                                    Next Question <ChevronRight className="inline ml-2 w-5 h-5" />
+                                  </button>
+                                </div>
                             )}
                           </div>
-
-                          <div className="space-y-4">
-                            {currentQ?.options.map((option, index) => {
-                              const isSelected = currentQ?.multiSelect
-                                  ? (answers[currentQ?.id] || []).includes(option.value)
-                                  : answers[currentQ?.id] === option.value;
-
-                              return (
-                                  <button
-                                      key={index}
-                                      onClick={() => handleAnswer(currentQ?.id, option, currentQ?.multiSelect)}
-                                      className={`w-full p-4 rounded-xl border-2 transition-all duration-300 text-left ${
-                                          isSelected
-                                              ? 'border-purple bg-purple-600/30 text-white'
-                                              : 'border-gray-600 bg-gray-800/50 hover:border-purple-500 hover:bg-purple-600/20'
-                                      }`}
-                                  >
-                                    <div className="flex items-center">
-                                      {currentQ?.multiSelect && (
-                                          <div className={`w-5 h-5 rounded border-2 mr-3 flex items-center justify-center ${
-                                              isSelected ? 'bg-purple-600 border-purple' : 'border-gray-500'
-                                          }`}>
-                                            {isSelected && <CheckCircle className="w-3 h-3" />}
-                                          </div>
-                                      )}
-                                      <span className="text-lg">{option.text}</span>
-                                    </div>
-                                  </button>
-                              );
-                            })}
-                          </div>
-
-                          {currentQ?.multiSelect && (
-                              <div className="mt-8 text-center">
-                                <button
-                                    onClick={handleNextMultiSelect}
-                                    disabled={!answers[currentQ?.id] || answers[currentQ?.id].length === 0}
-                                    className="bg-gradient-button hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 px-6 rounded-xl transition-all duration-300"
-                                >
-                                  Next Question <ChevronRight className="inline ml-2 w-5 h-5" />
-                                </button>
-                              </div>
-                          )}
                         </div>
                       </div>
                     </div>
@@ -353,64 +407,68 @@ const Home = () => {
                 {showLeadForm && (
                     <div className="container mx-auto px-6 py-20">
                       <div className="max-w-2xl mx-auto">
-                        <div className="bg-gradient-glass backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-                          <h2 className="text-3xl font-bold mb-6 text-center">
-                            🔍 See Your AI Automation Score
-                          </h2>
-                          <p className="text-xl mb-8 text-center">
-                            Enter your details to see your personalized results and qualification status
-                          </p>
+                        <div className="bg-gradient-to-b from-neutral-800/30 to-neutral-900/30 backdrop-blur-lg rounded-[40px] p-12 border-2 border-fuchsia-200 relative overflow-hidden">
+                          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-l from-fuchsia-200/10 via-fuchsia-600/10 to-violet-600/10 rounded-full blur-3xl"></div>
 
-                          <div className="space-y-6">
-                            <div>
-                              <label className="block text-sm font-medium mb-2">
-                                <User className="inline w-4 h-4 mr-2" />
-                                Name
-                              </label>
-                              <input
-                                  type="text"
-                                  value={leadInfo.name}
-                                  onChange={(e) => setLeadInfo(prev => ({ ...prev, name: e.target.value }))}
-                                  className="w-full px-4 py-3 rounded-xl bg-gray-800/50 border border-gray-600 focus:border-purple-500 focus:outline-none"
-                                  placeholder="Your full name"
-                              />
+                          <div className="relative z-10">
+                            <h2 className="text-4xl font-bold mb-8 text-center font-['Poppins'] text-white">
+                              🔍 See Your AI Automation Score
+                            </h2>
+                            <p className="text-xl mb-12 text-center font-['Poppins'] text-white/80">
+                              Enter your details to see your personalized results and qualification status
+                            </p>
+
+                            <div className="space-y-8">
+                              <div>
+                                <label className="block text-lg font-medium mb-3 font-['Poppins'] text-white">
+                                  <User className="inline w-5 h-5 mr-3" />
+                                  Name
+                                </label>
+                                <input
+                                    type="text"
+                                    value={leadInfo.name}
+                                    onChange={(e) => setLeadInfo(prev => ({ ...prev, name: e.target.value }))}
+                                    className="w-full px-6 py-4 rounded-xl bg-gradient-to-b from-neutral-800/50 to-neutral-900/50 border border-neutral-700 focus:border-fuchsia-200 focus:outline-none text-white placeholder-white/50 font-['Inter']"
+                                    placeholder="Your full name"
+                                />
+                              </div>
+
+                              <div>
+                                <label className="block text-lg font-medium mb-3 font-['Poppins'] text-white">
+                                  <Mail className="inline w-5 h-5 mr-3" />
+                                  Email
+                                </label>
+                                <input
+                                    type="email"
+                                    value={leadInfo.email}
+                                    onChange={(e) => setLeadInfo(prev => ({ ...prev, email: e.target.value }))}
+                                    className="w-full px-6 py-4 rounded-xl bg-gradient-to-b from-neutral-800/50 to-neutral-900/50 border border-neutral-700 focus:border-fuchsia-200 focus:outline-none text-white placeholder-white/50 font-['Inter']"
+                                    placeholder="your@email.com"
+                                />
+                              </div>
+
+                              <div>
+                                <label className="block text-lg font-medium mb-3 font-['Poppins'] text-white">
+                                  <Phone className="inline w-5 h-5 mr-3" />
+                                  Phone Number
+                                </label>
+                                <input
+                                    type="tel"
+                                    value={leadInfo.phone}
+                                    onChange={(e) => setLeadInfo(prev => ({ ...prev, phone: e.target.value }))}
+                                    className="w-full px-6 py-4 rounded-xl bg-gradient-to-b from-neutral-800/50 to-neutral-900/50 border border-neutral-700 focus:border-fuchsia-200 focus:outline-none text-white placeholder-white/50 font-['Inter']"
+                                    placeholder="(555) 123-4567"
+                                />
+                              </div>
+
+                              <button
+                                  onClick={handleLeadSubmit}
+                                  disabled={!leadInfo.name || !leadInfo.email || !leadInfo.phone}
+                                  className="cursor-pointer w-full bg-gradient-to-l from-fuchsia-200 via-fuchsia-600 to-violet-600 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-6 px-8 rounded-xl text-xl transition-all duration-300 transform hover:scale-105 shadow-[0px_2px_12px_0px_rgba(212,151,255,1.00)] font-['Inter']"
+                              >
+                                See My Results & Qualification Status
+                              </button>
                             </div>
-
-                            <div>
-                              <label className="block text-sm font-medium mb-2">
-                                <Mail className="inline w-4 h-4 mr-2" />
-                                Email
-                              </label>
-                              <input
-                                  type="email"
-                                  value={leadInfo.email}
-                                  onChange={(e) => setLeadInfo(prev => ({ ...prev, email: e.target.value }))}
-                                  className="w-full px-4 py-3 rounded-xl bg-gray-800/50 border border-gray-600 focus:border-purple-500 focus:outline-none"
-                                  placeholder="your@email.com"
-                              />
-                            </div>
-
-                            <div>
-                              <label className="block text-sm font-medium mb-2">
-                                <Phone className="inline w-4 h-4 mr-2" />
-                                Phone Number
-                              </label>
-                              <input
-                                  type="tel"
-                                  value={leadInfo.phone}
-                                  onChange={(e) => setLeadInfo(prev => ({ ...prev, phone: e.target.value }))}
-                                  className="w-full px-4 py-3 rounded-xl bg-gray-800/50 border border-gray-600 focus:border-purple-500 focus:outline-none"
-                                  placeholder="(555) 123-4567"
-                              />
-                            </div>
-
-                            <button
-                                onClick={handleLeadSubmit}
-                                disabled={!leadInfo.name || !leadInfo.email || !leadInfo.phone}
-                                className="cursor-pointer w-full bg-gradient-to-t from-fuchsia-200 via-fuchsia-600 to-violet-600 hover:bg-[#8B31CA] hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 px-6 rounded-xl text-xl transition-all duration-300 transform hover:scale-105"
-                            >
-                              See My Results & Qualification Status
-                            </button>
                           </div>
                         </div>
                       </div>
@@ -421,54 +479,58 @@ const Home = () => {
               /* Results Section */
               <div className="container mx-auto px-6 py-20">
                 <div className="max-w-4xl mx-auto text-center">
-                  <div className="bg-gradient-glass backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-                    {qualified ? (
-                        <div>
-                          <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-6" />
-                          <h2 className="text-4xl font-bold text-green-400 mb-4">
-                            You Qualify — Welcome to the Inner Circle
-                          </h2>
-                          <p className="text-xl mb-8">
-                            Based on your answers, you're exactly the kind of coach we built this for.
-                          </p>
-                          <p className="text-lg mb-8">
-                            You've officially secured your spot inside the Next Level Coach Vault — one of only 100 coaches to gain early access.
-                          </p>
-                          <p className="text-lg mb-8">
-                            This is your invite into the room where the future of coaching is being built.
-                          </p>
-                          <p className="text-2xl font-bold text-magenta-light mb-8">
-                            Let's make it count!
-                          </p>
+                  <div className="bg-gradient-to-b from-neutral-800/30 to-neutral-900/30 backdrop-blur-lg rounded-[40px] p-12 border-2 border-fuchsia-200 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-l from-fuchsia-200/10 via-fuchsia-600/10 to-violet-600/10 rounded-full blur-3xl"></div>
 
-                          <div className="bg-gradient-to-r from-green-600/30 to-blue-600/30 rounded-xl p-6 border border-green-400/30 mb-8">
-                            <h3 className="text-xl font-bold mb-4">🎯 AI-Ready Coach</h3>
-                            <p className="text-lg">
-                              Eligible for the AI Coach Vault + Free Automation Blueprint
+                    <div className="relative z-10">
+                      {qualified ? (
+                          <div>
+                            <CheckCircle className="w-20 h-20 text-green-400 mx-auto mb-8" />
+                            <h2 className="text-5xl font-bold text-green-400 mb-6 font-['Poppins']">
+                              You Qualify — Welcome to the Inner Circle
+                            </h2>
+                            <p className="text-2xl mb-12 font-['Poppins'] text-white/80">
+                              Based on your answers, you're exactly the kind of coach we built this for.
+                            </p>
+                            <p className="text-xl mb-8 font-['Poppins'] text-white/80">
+                              You've officially secured your spot inside the Next Level Coach Vault — one of only 100 coaches to gain early access.
+                            </p>
+                            <p className="text-xl mb-8 font-['Poppins'] text-white/80">
+                              This is your invite into the room where the future of coaching is being built.
+                            </p>
+                            <p className="text-3xl font-bold text-fuchsia-200 mb-12 font-['Poppins']">
+                              Let's make it count!
+                            </p>
+
+                            <div className="bg-gradient-to-r from-green-600/30 to-blue-600/30 rounded-[20px] p-8 border border-green-400/30 mb-12">
+                              <h3 className="text-2xl font-bold mb-4 font-['Poppins'] text-white">🎯 AI-Ready Coach</h3>
+                              <p className="text-xl font-['Poppins'] text-white/80">
+                                Eligible for the AI Coach Vault + Free Automation Blueprint
+                              </p>
+                            </div>
+
+                            <button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-6 px-12 rounded-xl text-xl transition-all duration-300 transform hover:scale-105 font-['Inter']">
+                              Join the Vault Now
+                            </button>
+                          </div>
+                      ) : (
+                          <div>
+                            <XCircle className="w-20 h-20 text-red-400 mx-auto mb-8" />
+                            <h2 className="text-5xl font-bold text-red-400 mb-6 font-['Poppins']">
+                              You Didn't Qualify — Yet
+                            </h2>
+                            <p className="text-2xl mb-8 font-['Poppins'] text-white/80">
+                              Thanks for taking the quiz. Based on your answers, you're not quite ready for Next Level Coach AI.
+                            </p>
+                            <p className="text-xl mb-8 font-['Poppins'] text-white/80">
+                              But businesses evolve — and when things shift, we'd love to reconnect.
+                            </p>
+                            <p className="text-xl text-white/60 font-['Poppins']">
+                              Keep doing great work. We'll be here when the timing makes sense.
                             </p>
                           </div>
-
-                          <button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-4 px-8 rounded-xl text-xl transition-all duration-300 transform hover:scale-105">
-                            Join the Vault Now
-                          </button>
-                        </div>
-                    ) : (
-                        <div>
-                          <XCircle className="w-16 h-16 text-red-400 mx-auto mb-6" />
-                          <h2 className="text-4xl font-bold text-red-400 mb-4">
-                            You Didn't Qualify — Yet
-                          </h2>
-                          <p className="text-xl mb-6">
-                            Thanks for taking the quiz. Based on your answers, you're not quite ready for Next Level Coach AI.
-                          </p>
-                          <p className="text-lg mb-6">
-                            But businesses evolve — and when things shift, we'd love to reconnect.
-                          </p>
-                          <p className="text-lg text-gray-300">
-                            Keep doing great work. We'll be here when the timing makes sense.
-                          </p>
-                        </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
