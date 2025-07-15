@@ -152,7 +152,6 @@ const Home = () => {
     if (answers[2] === 'support_staff' || answers[2] === 'freelancer') return false;
     if (answers[3] && answers[3].includes('no_problems')) return false;
 
-    // Calculate points from question 3 and 6
     let points = 0;
     if (answers[3]) {
       points += (answers[3] as string[]).filter(a => a !== 'no_problems').length;
