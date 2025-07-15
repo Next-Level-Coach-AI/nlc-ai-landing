@@ -177,16 +177,16 @@ const Home = () => {
     setQuizCompleted(true);
   };
 
-  const currentQ = questions[currentQuestion];
+  const currentQ = questions.find(({ id }) => currentQuestion === id);
 
   return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-800 via-purple-900 to-purple-950 text-white overflow-hidden relative">
+      <div className="min-h-screen bg-gradient-button text-white overflow-hidden relative">
         {/* Animated Background Dots */}
         <div className="absolute inset-0 overflow-hidden">
           {dots.map(dot => (
               <div
                   key={dot.id}
-                  className="absolute rounded-full bg-purple-400"
+                  className="absolute rounded-full bg-magenta"
                   style={{
                     left: `${dot.x}%`,
                     top: `${dot.y}%`,
@@ -220,7 +220,7 @@ const Home = () => {
                           <Lock className="w-8 h-8 mr-4 text-yellow-400" />
                           <h2 className="text-2xl md:text-4xl font-semibold">
                             Access to the Next Level Coach Vault{' '}
-                            <span className="text-purple-300 italic">(exclusive early-access community)</span>
+                            <span className="text-magenta-light italic">(exclusive early-access community)</span>
                           </h2>
                         </div>
 
@@ -228,14 +228,14 @@ const Home = () => {
                           This is not for everyone.
                         </p>
 
-                        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 mb-12">
+                        <div className="bg-gradient-glass backdrop-blur-lg rounded-2xl p-8 border border-white/20 mb-12">
                           <p className="text-lg mb-6">
                             Only the <span className="text-yellow-400 font-bold">first 100 coaches who qualify</span> will be granted access to our private AI Vault — a behind-the-scenes community where you'll:
                           </p>
 
                           <div className="grid md:grid-cols-3 gap-6 text-left">
                             <div className="flex items-start space-x-3">
-                              <Zap className="w-6 h-6 text-purple-400 mt-1 flex-shrink-0" />
+                              <Zap className="w-6 h-6 text-purple mt-1 flex-shrink-0" />
                               <span>Be the first to access our software before the public launch</span>
                             </div>
                             <div className="flex items-start space-x-3">
@@ -253,7 +253,7 @@ const Home = () => {
                           Once the 100 spots are gone — they're gone for good.
                         </div>
 
-                        <div className="bg-gradient-to-r from-purple-600/30 to-blue-600/30 rounded-xl p-6 border border-purple-400/30 mb-8">
+                        <div className="bg-gradient-to-r from-purple-600/30 to-blue-600/30 rounded-xl p-6 border border-purple/30 mb-8">
                           <p className="text-lg mb-4">
                             If you're serious about scaling smarter and staying ahead of the curve, this is your moment.
                           </p>
@@ -264,7 +264,7 @@ const Home = () => {
 
                         <button
                             onClick={() => setCurrentQuestion(1)}
-                            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-4 px-8 rounded-xl text-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                            className="bg-gradient-to-t from-fuchsia-200 via-fuchsia-600 to-violet-600 hover:bg-[#8B31CA] hover:opacity-90 cursor-pointer text-white font-bold py-4 px-8 rounded-xl text-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                         >
                           Take The Quiz: "What's Your AI Automation Score?"
                           <ChevronRight className="inline ml-2 w-6 h-6" />
@@ -281,47 +281,47 @@ const Home = () => {
                 {currentQuestion > 0 && !showLeadForm && (
                     <div className="container mx-auto px-6 py-20">
                       <div className="max-w-4xl mx-auto">
-                        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+                        <div className="bg-gradient-glass backdrop-blur-lg rounded-2xl p-8 border border-white/20">
                           <div className="mb-8">
                             <div className="flex justify-between items-center mb-4">
-                              <span className="text-purple-300">Question {currentQuestion} of {questions.length}</span>
+                              <span className="text-magenta-light">Question {currentQuestion} of {questions.length}</span>
                               <div className="w-32 bg-gray-700 rounded-full h-2">
                                 <div
-                                    className="bg-gradient-to-r from-purple-500 to-blue-500 h-2 rounded-full transition-all duration-300"
+                                    className="bg-gradient-to-r from-magenta to-purple h-2 rounded-full transition-all duration-300"
                                     style={{ width: `${(currentQuestion / questions.length) * 100}%` }}
                                 ></div>
                               </div>
                             </div>
 
-                            <h2 className="text-2xl md:text-3xl font-bold mb-2">{currentQ.text}</h2>
-                            {currentQ.subtitle && (
-                                <p className="text-gray-300">{currentQ.subtitle}</p>
+                            <h2 className="text-2xl md:text-3xl font-bold mb-2">{currentQ?.text}</h2>
+                            {currentQ?.subtitle && (
+                                <p className="text-gray-300">{currentQ?.subtitle}</p>
                             )}
-                            {currentQ.multiSelect && (
-                                <p className="text-sm text-purple-300 mt-2">Select all that apply</p>
+                            {currentQ?.multiSelect && (
+                                <p className="text-sm text-magenta-light mt-2">Select all that apply</p>
                             )}
                           </div>
 
                           <div className="space-y-4">
-                            {currentQ.options.map((option, index) => {
-                              const isSelected = currentQ.multiSelect
-                                  ? (answers[currentQ.id] || []).includes(option.value)
-                                  : answers[currentQ.id] === option.value;
+                            {currentQ?.options.map((option, index) => {
+                              const isSelected = currentQ?.multiSelect
+                                  ? (answers[currentQ?.id] || []).includes(option.value)
+                                  : answers[currentQ?.id] === option.value;
 
                               return (
                                   <button
                                       key={index}
-                                      onClick={() => handleAnswer(currentQ.id, option, currentQ.multiSelect)}
+                                      onClick={() => handleAnswer(currentQ?.id, option, currentQ?.multiSelect)}
                                       className={`w-full p-4 rounded-xl border-2 transition-all duration-300 text-left ${
                                           isSelected
-                                              ? 'border-purple-400 bg-purple-600/30 text-white'
+                                              ? 'border-purple bg-purple-600/30 text-white'
                                               : 'border-gray-600 bg-gray-800/50 hover:border-purple-500 hover:bg-purple-600/20'
                                       }`}
                                   >
                                     <div className="flex items-center">
-                                      {currentQ.multiSelect && (
+                                      {currentQ?.multiSelect && (
                                           <div className={`w-5 h-5 rounded border-2 mr-3 flex items-center justify-center ${
-                                              isSelected ? 'bg-purple-600 border-purple-400' : 'border-gray-500'
+                                              isSelected ? 'bg-purple-600 border-purple' : 'border-gray-500'
                                           }`}>
                                             {isSelected && <CheckCircle className="w-3 h-3" />}
                                           </div>
@@ -333,12 +333,12 @@ const Home = () => {
                             })}
                           </div>
 
-                          {currentQ.multiSelect && (
+                          {currentQ?.multiSelect && (
                               <div className="mt-8 text-center">
                                 <button
                                     onClick={handleNextMultiSelect}
-                                    disabled={!answers[currentQ.id] || answers[currentQ.id].length === 0}
-                                    className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 px-6 rounded-xl transition-all duration-300"
+                                    disabled={!answers[currentQ?.id] || answers[currentQ?.id].length === 0}
+                                    className="bg-gradient-button hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 px-6 rounded-xl transition-all duration-300"
                                 >
                                   Next Question <ChevronRight className="inline ml-2 w-5 h-5" />
                                 </button>
@@ -353,7 +353,7 @@ const Home = () => {
                 {showLeadForm && (
                     <div className="container mx-auto px-6 py-20">
                       <div className="max-w-2xl mx-auto">
-                        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+                        <div className="bg-gradient-glass backdrop-blur-lg rounded-2xl p-8 border border-white/20">
                           <h2 className="text-3xl font-bold mb-6 text-center">
                             🔍 See Your AI Automation Score
                           </h2>
@@ -407,7 +407,7 @@ const Home = () => {
                             <button
                                 onClick={handleLeadSubmit}
                                 disabled={!leadInfo.name || !leadInfo.email || !leadInfo.phone}
-                                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 px-6 rounded-xl text-xl transition-all duration-300 transform hover:scale-105"
+                                className="cursor-pointer w-full bg-gradient-to-t from-fuchsia-200 via-fuchsia-600 to-violet-600 hover:bg-[#8B31CA] hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 px-6 rounded-xl text-xl transition-all duration-300 transform hover:scale-105"
                             >
                               See My Results & Qualification Status
                             </button>
@@ -421,7 +421,7 @@ const Home = () => {
               /* Results Section */
               <div className="container mx-auto px-6 py-20">
                 <div className="max-w-4xl mx-auto text-center">
-                  <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+                  <div className="bg-gradient-glass backdrop-blur-lg rounded-2xl p-8 border border-white/20">
                     {qualified ? (
                         <div>
                           <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-6" />
@@ -437,7 +437,7 @@ const Home = () => {
                           <p className="text-lg mb-8">
                             This is your invite into the room where the future of coaching is being built.
                           </p>
-                          <p className="text-2xl font-bold text-purple-300 mb-8">
+                          <p className="text-2xl font-bold text-magenta-light mb-8">
                             Let's make it count!
                           </p>
 
