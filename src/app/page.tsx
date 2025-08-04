@@ -203,7 +203,7 @@ const Home = () => {
                         <div className="relative z-10">
                           <div className="mb-12">
                             <div className="flex justify-between items-center mb-6">
-                              <span className="text-purple-300 font-['Inter'] text-lg">Question {currentQuestion} of {questions.length}</span>
+                              <span className="text-purple-300 font-poppins text-lg">Question {currentQuestion} of {questions.length}</span>
                               <div className="w-48 bg-gray-800 rounded-full h-3">
                                 <div
                                     className="bg-gradient-to-r from-purple-500 via-fuchsia-500 to-purple-600 h-3 rounded-full transition-all duration-500"
@@ -212,12 +212,12 @@ const Home = () => {
                               </div>
                             </div>
 
-                            <h2 className="text-3xl md:text-4xl font-bold mb-4 font-['Inter'] text-white">{currentQ?.text}</h2>
+                            <h2 className="text-3xl md:text-4xl font-bold mb-4 font-poppins text-white">{currentQ?.text}</h2>
                             {currentQ?.subtitle && (
-                                <p className="text-white/70 text-lg font-['Inter']">{currentQ?.subtitle}</p>
+                                <p className="text-white/70 text-lg font-poppins">{currentQ?.subtitle}</p>
                             )}
                             {currentQ?.multiSelect && (
-                                <p className="text-base text-purple-300 mt-4 font-['Inter']">Select all that apply</p>
+                                <p className="text-base text-purple-300 mt-4 font-poppins">Select all that apply</p>
                             )}
                           </div>
 
@@ -231,7 +231,7 @@ const Home = () => {
                                   <button
                                       key={index}
                                       onClick={() => handleAnswer(currentQ?.id, option, currentQ?.multiSelect)}
-                                      className={`w-full p-6 rounded-2xl border-2 transition-all duration-300 text-left font-['Inter'] ${
+                                      className={`w-full p-6 rounded-2xl border-2 transition-all duration-300 text-left font-poppins ${
                                           isSelected
                                               ? 'border-purple-400 bg-gradient-to-r from-purple-500/20 to-fuchsia-500/20 text-white'
                                               : 'border-gray-700 bg-black/20 hover:border-purple-400/50 hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-fuchsia-500/10 text-white/80'
@@ -257,7 +257,7 @@ const Home = () => {
                                 <button
                                     onClick={handleNextMultiSelect}
                                     disabled={!answers[currentQ?.id] || answers[currentQ?.id].length === 0}
-                                    className="bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-700 hover:to-fuchsia-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 font-['Inter'] text-lg"
+                                    className="bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-700 hover:to-fuchsia-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 font-poppins text-lg"
                                 >
                                   Next Question <ChevronRight className="inline ml-2 w-5 h-5" />
                                 </button>
@@ -277,16 +277,16 @@ const Home = () => {
                         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-l from-purple-600/10 via-fuchsia-600/10 to-violet-600/10 rounded-full blur-3xl"></div>
 
                         <div className="relative z-10">
-                          <h2 className="text-4xl font-bold mb-8 text-center font-['Inter'] text-white">
+                          <h2 className="text-4xl font-bold mb-8 text-center font-poppins text-white">
                             🔍 See Your AI Automation Score
                           </h2>
-                          <p className="text-xl mb-12 text-center font-['Inter'] text-white/80">
+                          <p className="text-xl mb-12 text-center font-poppins text-white/80">
                             Enter your details to see your personalized results and qualification status
                           </p>
 
                           <div className="space-y-6">
                             <div>
-                              <label className="block text-lg font-medium mb-3 font-['Inter'] text-white">
+                              <label className="block text-lg font-medium mb-3 font-poppins text-white">
                                 <User className="inline w-5 h-5 mr-3" />
                                 Name
                               </label>
@@ -294,13 +294,13 @@ const Home = () => {
                                   type="text"
                                   value={leadInfo.name}
                                   onChange={(e) => setLeadInfo(prev => ({ ...prev, name: e.target.value }))}
-                                  className="w-full px-6 py-4 rounded-xl bg-black/30 border border-gray-700 focus:border-purple-400 focus:outline-none text-white placeholder-white/50 font-['Inter']"
+                                  className="w-full px-6 py-4 rounded-xl bg-black/30 border border-gray-700 focus:border-purple-400 focus:outline-none text-white placeholder-white/50 font-poppins"
                                   placeholder="Your full name"
                               />
                             </div>
 
                             <div>
-                              <label className="block text-lg font-medium mb-3 font-['Inter'] text-white">
+                              <label className="block text-lg font-medium mb-3 font-poppins text-white">
                                 <Mail className="inline w-5 h-5 mr-3" />
                                 Email
                               </label>
@@ -308,13 +308,13 @@ const Home = () => {
                                   type="email"
                                   value={leadInfo.email}
                                   onChange={(e) => setLeadInfo(prev => ({ ...prev, email: e.target.value }))}
-                                  className="w-full px-6 py-4 rounded-xl bg-black/30 border border-gray-700 focus:border-purple-400 focus:outline-none text-white placeholder-white/50 font-['Inter']"
+                                  className="w-full px-6 py-4 rounded-xl bg-black/30 border border-gray-700 focus:border-purple-400 focus:outline-none text-white placeholder-white/50 font-poppins"
                                   placeholder="your@email.com"
                               />
                             </div>
 
                             <div>
-                              <label className="block text-lg font-medium mb-3 font-['Inter'] text-white">
+                              <label className="block text-lg font-medium mb-3 font-poppins text-white">
                                 <Phone className="inline w-5 h-5 mr-3" />
                                 Phone Number
                               </label>
@@ -322,7 +322,7 @@ const Home = () => {
                                   type="tel"
                                   value={leadInfo.phone}
                                   onChange={(e) => setLeadInfo(prev => ({ ...prev, phone: e.target.value }))}
-                                  className="w-full px-6 py-4 rounded-xl bg-black/30 border border-gray-700 focus:border-purple-400 focus:outline-none text-white placeholder-white/50 font-['Inter']"
+                                  className="w-full px-6 py-4 rounded-xl bg-black/30 border border-gray-700 focus:border-purple-400 focus:outline-none text-white placeholder-white/50 font-poppins"
                                   placeholder="(555) 123-4567"
                               />
                             </div>
@@ -330,7 +330,7 @@ const Home = () => {
                             <button
                                 onClick={handleLeadSubmit}
                                 disabled={!leadInfo.name || !leadInfo.email || !leadInfo.phone}
-                                className="w-full bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-700 hover:to-fuchsia-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-6 px-8 rounded-xl text-xl transition-all duration-300 transform hover:scale-105 shadow-[0px_4px_20px_0px_rgba(168,85,247,0.4)] font-['Inter']"
+                                className="w-full bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-700 hover:to-fuchsia-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-6 px-8 rounded-xl text-xl transition-all duration-300 transform hover:scale-105 shadow-[0px_4px_20px_0px_rgba(168,85,247,0.4)] font-poppins"
                             >
                               See My Results & Qualification Status
                             </button>
@@ -352,46 +352,46 @@ const Home = () => {
                     {qualified ? (
                         <div>
                           <CheckCircle className="w-20 h-20 text-green-400 mx-auto mb-8" />
-                          <h2 className="text-5xl font-bold text-green-400 mb-6 font-['Inter']">
+                          <h2 className="text-5xl font-bold text-green-400 mb-6 font-poppins">
                             You Qualify — Welcome to the Inner Circle
                           </h2>
-                          <p className="text-2xl mb-12 font-['Inter'] text-white/80">
+                          <p className="text-2xl mb-12 font-poppins text-white/80">
                             Based on your answers, you're exactly the kind of coach we built this for.
                           </p>
-                          <p className="text-xl mb-8 font-['Inter'] text-white/80">
+                          <p className="text-xl mb-8 font-poppins text-white/80">
                             You've officially secured your spot inside the Next Level Coach Vault — one of only 100 coaches to gain early access.
                           </p>
-                          <p className="text-xl mb-8 font-['Inter'] text-white/80">
+                          <p className="text-xl mb-8 font-poppins text-white/80">
                             This is your invite into the room where the future of coaching is being built.
                           </p>
-                          <p className="text-3xl font-bold text-purple-300 mb-12 font-['Inter']">
+                          <p className="text-3xl font-bold text-purple-300 mb-12 font-poppins">
                             Let's make it count!
                           </p>
 
                           <div className="bg-gradient-to-r from-green-600/30 to-blue-600/30 rounded-2xl p-8 border border-green-400/30 mb-12">
-                            <h3 className="text-2xl font-bold mb-4 font-['Inter'] text-white">🎯 AI-Ready Coach</h3>
-                            <p className="text-xl font-['Inter'] text-white/80">
+                            <h3 className="text-2xl font-bold mb-4 font-poppins text-white">🎯 AI-Ready Coach</h3>
+                            <p className="text-xl font-poppins text-white/80">
                               Eligible for the AI Coach Vault + Free Automation Blueprint
                             </p>
                           </div>
 
-                          <button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-6 px-12 rounded-xl text-xl transition-all duration-300 transform hover:scale-105 font-['Inter']">
+                          <button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-6 px-12 rounded-xl text-xl transition-all duration-300 transform hover:scale-105 font-poppins">
                             Join the Vault Now
                           </button>
                         </div>
                     ) : (
                         <div>
                           <XCircle className="w-20 h-20 text-red-400 mx-auto mb-8" />
-                          <h2 className="text-5xl font-bold text-red-400 mb-6 font-['Inter']">
+                          <h2 className="text-5xl font-bold text-red-400 mb-6 font-poppins">
                             You Didn't Qualify — Yet
                           </h2>
-                          <p className="text-2xl mb-8 font-['Inter'] text-white/80">
+                          <p className="text-2xl mb-8 font-poppins text-white/80">
                             Thanks for taking the quiz. Based on your answers, you're not quite ready for Next Level Coach AI.
                           </p>
-                          <p className="text-xl mb-8 font-['Inter'] text-white/80">
+                          <p className="text-xl mb-8 font-poppins text-white/80">
                             But businesses evolve — and when things shift, we'd love to reconnect.
                           </p>
-                          <p className="text-xl text-white/60 font-['Inter']">
+                          <p className="text-xl text-white/60 font-poppins">
                             Keep doing great work. We'll be here when the timing makes sense.
                           </p>
                         </div>

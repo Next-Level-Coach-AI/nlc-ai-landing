@@ -33,8 +33,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartQuiz }) => {
                             <Image src={'/images/logo.png'} height={48} width={48} alt={'Logo'}/>
                         </div>
                         <div className="text-left">
-                            <div className="text-white text-sm font-['Inter'] tracking-widest">Next Level</div>
-                            <div className="text-white text-xl font-semibold font-['Inter']">CoachAI</div>
+                            <div className="text-white text-sm font-poppins tracking-widest">Next Level</div>
+                            <div className="text-white text-xl font-semibold font-poppins">CoachAI</div>
                         </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartQuiz }) => {
                 <div className="container mx-auto px-6 pt-24 pb-16">
                     <div className="text-center max-w-6xl mx-auto">
                         {/* Main Headline */}
-                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-['Inter'] mb-6 leading-tight">
+                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-poppins mb-6 leading-tight">
                             <span className="text-white">Your Coaching Business.</span>
                             <br />
                             <span className="bg-gradient-to-t from-fuchsia-200 via-fuchsia-600 to-purple-900 bg-clip-text text-transparent">
@@ -51,7 +51,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartQuiz }) => {
                         </h1>
 
                         {/* Subtitle */}
-                        <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed font-['Inter']">
+                        <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed font-poppins">
                             AI Agents designed for you that handle client emails, content creation, client
                             retention, lead qualifiers and lead follow-ups — so you don't have to!
                         </p>
@@ -84,7 +84,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartQuiz }) => {
                                                 <path d="M8 5v14l11-7z"/>
                                             </svg>
                                         </div>
-                                        <p className="text-gray-300 font-['Inter']">Watch Demo</p>
+                                        <p className="text-gray-300 font-poppins">Watch Demo</p>
                                     </div>
 
                                     {/* Video background pattern */}
