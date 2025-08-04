@@ -77,9 +77,10 @@ module.exports = {
                 "gradient-purple-dark": "linear-gradient(135deg, #7B21BA 0%, #4B0BA3 50%, #2D0861 100%)",
                 "gradient-fuchsia": "linear-gradient(to right, #FEBEFA, #B339D4, #7B21BA)",
                 "gradient-blur": "linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1))",
+                "gradient-autopilot": "linear-gradient(5.46deg, #FEBEFA 10.93%, #B339D4 36.68%, #7B21BA 60.9%, #7B26F0 88.16%)"
             },
             fontFamily: {
-                sans: ['Inter', 'var(--font-geist-sans)', 'system-ui', 'sans-serif'],
+                sans: ['Poppins', 'Inter', 'var(--font-geist-sans)', 'system-ui', 'sans-serif'],
                 mono: ['var(--font-geist-mono)', 'Menlo', 'Monaco', 'monospace'],
                 poppins: ['Poppins', 'sans-serif'],
                 inter: ['Inter', 'sans-serif'],
