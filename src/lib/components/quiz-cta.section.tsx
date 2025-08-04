@@ -1,13 +1,12 @@
-import React from 'react';
-import { ChevronRight } from 'lucide-react';
+import { FC } from 'react';
 
 interface QuizCTASectionProps {
     onStartQuiz: () => void;
 }
 
-export const QuizCTASection: React.FC<QuizCTASectionProps> = ({ onStartQuiz }) => {
+export const QuizCTASection: FC<QuizCTASectionProps> = ({ onStartQuiz }) => {
     return (
-        <div className="container mx-auto px-6 py-20">
+        <div className="container mx-auto px-6 py-10">
             <div className="max-w-4xl mx-auto">
                 <div className="glass-card bg-gradient-exclusive rounded-3xl p-8 md:p-12 border border-purple-500/20 relative overflow-hidden">
                     {/* Background glow effects */}
@@ -29,7 +28,7 @@ export const QuizCTASection: React.FC<QuizCTASectionProps> = ({ onStartQuiz }) =
 
                         <button
                             onClick={onStartQuiz}
-                            className="group bg-gradient-to-t from-fuchsia-200 via-fuchsia-600 to-purple-700 hover:from-purple-700 hover:via-fuchsia-700 hover:to-purple-800 text-white font-bold py-3 px-12 rounded-xl text-xl transition-all duration-300 transform hover:scale-105 shadow-[0px_4px_20px_0px_rgba(168,85,247,0.4)] hover:shadow-[0px_8px_30px_0px_rgba(168,85,247,0.6)] font-poppins relative overflow-hidden"
+                            className="group bg-gradient-to-t from-fuchsia-200 via-fuchsia-600 to-purple-700 cursor-pointer hover:from-purple-300 hover:via-fuchsia-700 hover:to-purple-800 text-white font-bold py-3 px-12 rounded-xl text-xl transition-all duration-300 transform hover:scale-105 shadow-[0px_4px_20px_0px_rgba(168,85,247,0.4)] hover:shadow-[0px_8px_30px_0px_rgba(168,85,247,0.6)] font-poppins relative overflow-hidden"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
 

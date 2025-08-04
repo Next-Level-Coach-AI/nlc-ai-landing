@@ -73,7 +73,7 @@ const ResultsPage = () => {
                                         </p>
                                     </div>
 
-                                    <button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-6 px-12 rounded-xl text-xl transition-all duration-300 transform hover:scale-105 font-poppins">
+                                    <button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-3 px-12 rounded-lg text-xl transition-all duration-300 transform hover:scale-105 font-poppins">
                                         Join the Vault Now
                                     </button>
                                 </div>
@@ -96,7 +96,7 @@ const ResultsPage = () => {
                                     <div className="mt-12">
                                         <button
                                             onClick={() => router.push('/')}
-                                            className="bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-700 hover:to-fuchsia-700 text-white font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 font-poppins"
+                                            className="bg-gradient-to-t cursor-pointer from-fuchsia-200 via-fuchsia-600 to-purple-700 hover:from-fuchsia-300 hover:via-fuchsia-700 hover:to-purple-800 text-white font-bold py-2 px-8 rounded-lg text-lg transition-all duration-300 font-poppins"
                                         >
                                             Return to Home
                                         </button>

@@ -94,7 +94,7 @@ const LeadFormPage = () => {
                                 <button
                                     onClick={handleSubmit}
                                     disabled={!leadInfo.name || !leadInfo.email || !leadInfo.phone}
-                                    className="w-full bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-700 hover:to-fuchsia-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-6 px-8 rounded-xl text-xl transition-all duration-300 transform hover:scale-105 shadow-[0px_4px_20px_0px_rgba(168,85,247,0.4)] font-poppins"
+                                    className="w-full bg-gradient-to-t cursor-pointer from-fuchsia-200 via-fuchsia-600 to-purple-700 hover:from-fuchsia-300 hover:via-fuchsia-700 hover:to-purple-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 px-8 rounded-lg text-xl transition-all duration-300 transform hover:scale-105 shadow-[0px_4px_20px_0px_rgba(168,85,247,0.4)] font-poppins"
                                 >
                                     See My Results & Qualification Status
                                 </button>

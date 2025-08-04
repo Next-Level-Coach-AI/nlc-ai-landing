@@ -1,8 +1,6 @@
-import React from 'react';
-
-export const ExclusiveAccessSection: React.FC = () => {
+export const ExclusiveAccessSection = () => {
     return (
-        <div className="container mx-auto px-6 py-20">
+        <div className="container mx-auto px-6 py-10">
             <div className="text-center max-w-5xl mx-auto">
                 {/* Main Headline */}
                 <h2 className="text-4xl md:text-5xl font-bold mb-4 font-poppins leading-tight">

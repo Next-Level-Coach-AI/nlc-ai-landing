@@ -1,11 +1,11 @@
-import React from 'react';
+import { FC } from 'react';
 import Image from "next/image";
 
 interface HeroSectionProps {
     onStartQuiz: () => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ onStartQuiz }) => {
+export const HeroSection: FC<HeroSectionProps> = ({ onStartQuiz }) => {
     return (
         <>
             <style jsx>
@@ -39,7 +39,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStartQuiz }) => {
                     </div>
                 </div>
 
-                <div className="container mx-auto px-6 pt-24 pb-16">
+                <div className="container mx-auto px-6 pt-24">
                     <div className="text-center max-w-6xl mx-auto">
                         {/* Main Headline */}
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-poppins mb-6 leading-tight">

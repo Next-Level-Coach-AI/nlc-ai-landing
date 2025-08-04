@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ChevronRight, CheckCircle } from 'lucide-react';
-import { PageBackground } from '../../lib/components';
+import { PageBackground } from '@/lib/components';
 import { type Answers, type QuestionOption } from '@/lib/types';
 import { questions } from "@/lib/data";
 
@@ -60,24 +60,56 @@ const QuizPage = () => {
   return (
       <PageBackground>
         <div className="container mx-auto px-6 py-20">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <div className="glass-card rounded-3xl p-8 md:p-12 border border-purple-500/20 relative overflow-hidden">
               {/* Background glow effects */}
               <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-l from-purple-600/10 via-fuchsia-600/10 to-violet-600/10 rounded-full blur-3xl"></div>
 
               <div className="relative z-10">
                 <div className="mb-12">
-                  <div className="flex justify-between items-center mb-6">
-                    <span className="text-purple-300 font-poppins text-lg">Question {currentQuestion + 1} of {questions.length}</span>
-                    <div className="w-48 bg-gray-800 rounded-full h-3">
-                      <div
-                          className="bg-gradient-to-r from-purple-500 via-fuchsia-500 to-purple-600 h-3 rounded-full transition-all duration-500"
-                          style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
-                      ></div>
-                    </div>
+                  <div className="flex items-center justify-center mb-8">
+                    {questions.map((_, index) => {
+                      const step = index + 1;
+                      const isCompleted = index < currentQuestion;
+                      const isActive = index === currentQuestion;
+                      const isPrevActive = index - 1 === currentQuestion;
+                      return (
+                        <React.Fragment key={step}>
+                          {index > 0 && (
+                            <>
+                              <div
+                                  key={`line-${step}`}
+                                  className={`flex-1 h-0.5 ${
+                                      isCompleted || isActive || isPrevActive
+                                          ? 'bg-gradient-to-l from-purple-500 to-fuchsia-500'
+                                          : 'bg-gray-700'
+                                  }`}
+                              />
+                              <div
+                                  key={`line-${step}-x`}
+                                  className={`flex-1 h-0.5 ${
+                                      isCompleted || isActive
+                                          ? 'bg-gradient-to-l from-purple-500 to-fuchsia-500'
+                                          : 'bg-gray-700'
+                                  }`}
+                              />
+                            </>
+                          )}
+                          <div
+                            className={`w-8 h-8 flex items-center justify-center rounded ${
+                              isCompleted || isActive
+                                ? 'bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white'
+                                : 'border border-gray-700 text-white'
+                            }`}
+                          >
+                            {step}
+                          </div>
+                        </React.Fragment>
+                      );
+                    })}
                   </div>
 
-                  <h2 className="text-3xl md:text-4xl font-bold mb-4 font-poppins text-white">{currentQ?.text}</h2>
+                  <h2 className="text-3xl md:text-3xl font-bold mb-4 font-poppins text-white">{currentQ?.text}</h2>
                   {currentQ?.subtitle && (
                       <p className="text-white/70 text-lg font-poppins">{currentQ?.subtitle}</p>
                   )}
@@ -96,19 +128,25 @@ const QuizPage = () => {
                         <button
                             key={index}
                             onClick={() => handleAnswer(currentQ?.id, option, currentQ?.multiSelect)}
-                            className={`w-full p-6 rounded-2xl border-2 transition-all duration-300 text-left font-poppins ${
+                            className={`w-full p-6 cursor-pointer rounded-2xl border-2 transition-all duration-300 text-left font-poppins ${
                                 isSelected
                                     ? 'border-purple-400 bg-gradient-to-r from-purple-500/20 to-fuchsia-500/20 text-white'
                                     : 'border-gray-700 bg-black/20 hover:border-purple-400/50 hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-fuchsia-500/10 text-white/80'
                             }`}
                         >
                           <div className="flex items-center">
-                            {currentQ?.multiSelect && (
-                                <div className={`w-6 h-6 rounded border-2 mr-4 flex items-center justify-center ${
-                                    isSelected ? 'bg-purple-600 border-purple-400' : 'border-gray-500'
-                                }`}>
-                                  {isSelected && <CheckCircle className="w-4 h-4 text-white" />}
-                                </div>
+                            {currentQ?.multiSelect ? (
+                              <div className={`w-6 h-6 rounded border-2 mr-4 flex items-center justify-center ${
+                                isSelected ? 'bg-purple-600 border-purple-400' : 'border-gray-500'
+                              }`}>
+                                {isSelected && <CheckCircle className="w-4 h-4 text-white" />}
+                              </div>
+                            ) : (
+                              <div className={`w-6 h-6 rounded-full border-2 mr-4 flex items-center justify-center ${
+                                isSelected ? 'border-purple-400' : 'border-gray-500'
+                              }`}>
+                                {isSelected && <div className="w-3 h-3 bg-purple-500 rounded-full" />}
+                              </div>
                             )}
                             <span className="text-lg">{option.text}</span>
                           </div>
@@ -122,9 +160,9 @@ const QuizPage = () => {
                       <button
                           onClick={handleNextMultiSelect}
                           disabled={!answers[currentQ?.id] || answers[currentQ?.id].length === 0}
-                          className="bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-700 hover:to-fuchsia-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 font-poppins text-lg"
+                          className="bg-gradient-to-t from-fuchsia-200 via-fuchsia-600 to-purple-700 hover:from-fuchsia-300 hover:via-fuchsia-700 hover:to-purple-800 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-2 px-8 rounded-lg transition-all duration-300 font-poppins text-lg"
                       >
-                        Next Question <ChevronRight className="inline ml-2 w-5 h-5" />
+                        Next Step <ChevronRight className="inline ml-2 w-5 h-5" />
                       </button>
                     </div>
                 )}

@@ -1,8 +1,6 @@
-import React from 'react';
-
-export const UrgencySection: React.FC = () => {
+export const UrgencySection = () => {
     return (
-        <div>
+        <div className={"py-10"}>
             <div className="w-full flex items-center justify-center">
                 <div className="w-1/2">
                     {/* Urgency Headline */}
