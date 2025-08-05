@@ -7,7 +7,7 @@ interface QuizCTASectionProps {
 export const QuizCTASection: FC<QuizCTASectionProps> = ({ onStartQuiz }) => {
     return (
         <div className="container mx-auto px-6 py-10">
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-4xl mx-auto flex flex-col justify-center items-center sm:block">
                 <div className="glass-card bg-gradient-exclusive rounded-3xl p-8 md:p-12 border border-purple-500/20 relative overflow-hidden">
                     {/* Background glow effects */}
                     <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-l from-purple-600/10 via-fuchsia-600/10 to-violet-600/10 rounded-full blur-3xl"></div>
@@ -37,6 +37,9 @@ export const QuizCTASection: FC<QuizCTASectionProps> = ({ onStartQuiz }) => {
                             </span>
                         </button>
                     </div>
+                </div>
+                <div className="flex justify-center w-full sm:hidden">
+                    <img src={"/images/bg/urgency-bg.png"} alt="" />
                 </div>
             </div>
         </div>

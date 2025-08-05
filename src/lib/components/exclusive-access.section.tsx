@@ -38,7 +38,7 @@ export const ExclusiveAccessSection = () => {
                                 <img src={"/images/icons/light-bulb.png"} alt="icon" className="w-6 h-6"/>
                                 <div>
                                     <p className="text-lg text-white font-medium mb-2 font-poppins">
-                                        Be the first to access our software before its public launch
+                                        Get first access to the platform before public launch
                                     </p>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@ export const ExclusiveAccessSection = () => {
                                 <img src={"/images/icons/community.png"} alt="icon" className="w-6 h-6"/>
                                 <div>
                                     <p className="text-lg text-white font-medium mb-2 font-poppins">
-                                        Join a private circle of elite coaches pioneering the future of AI in coaching
+                                        Join a private circle of elite coaches pioneering the future of AI
                                     </p>
                                 </div>
                             </div>
