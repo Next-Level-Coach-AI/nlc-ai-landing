@@ -24,17 +24,17 @@ const RejectedScreen = () => (
             Keep doing great work. We'll be here when the timing makes sense.
         </p>
         <div className="flex justify-center space-x-6 mt-8">
-            <a href="https://x.com/yourhandle" target="_blank" rel="noopener noreferrer">
-                <SiX size={32} color="#FFFFFF" />
+            <a href="https://x.com/nextlevelcoach.ai" target="_blank" rel="noopener noreferrer">
+                <SiX size={24} color="#FFFFFF" />
             </a>
-            <a href="https://instagram.com/yourhandle" target="_blank" rel="noopener noreferrer">
-                <SiInstagram size={32} color="#FFFFFF" />
+            <a href="https://instagram.com/nextlevelcoach.ai" target="_blank" rel="noopener noreferrer">
+                <SiInstagram size={24} color="#FFFFFF" />
             </a>
-            <a href="https://tiktok.com/@yourhandle" target="_blank" rel="noopener noreferrer">
-                <SiTiktok size={32} color="#FFFFFF" />
+            <a href="https://tiktok.com/@nextlevelcoach.ai" target="_blank" rel="noopener noreferrer">
+                <SiTiktok size={24} color="#FFFFFF" />
             </a>
-            <a href="https://youtube.com/channel/yourchannel" target="_blank" rel="noopener noreferrer">
-                <SiYoutube size={32} color="#FFFFFF" />
+            <a href="https://youtube.com/channel/nextlevelcoach.ai" target="_blank" rel="noopener noreferrer">
+                <SiYoutube size={24} color="#FFFFFF" />
             </a>
         </div>
     </div>

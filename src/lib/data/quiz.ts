@@ -2,7 +2,7 @@ import {Answers, Question} from "@/lib/types/quiz";
 
 export const questions: Question[] = [
     {
-        id: 2,
+        id: 1,
         text: "How many clients do you currently have?",
         options: [
             { text: "0 - 10", value: "under10", disqualifies: true },
@@ -23,7 +23,7 @@ export const questions: Question[] = [
         ]
     },
     {
-        id: 1,
+        id: 3,
         text: "What's your average monthly revenue from coaching and digital products?",
         options: [
             { text: "Less than $5K", value: "under5k", disqualifies: true },
@@ -34,7 +34,7 @@ export const questions: Question[] = [
         ]
     },
     {
-        id: 2,
+        id: 4,
         text: "Which best describes your current role?",
         options: [
             { text: "I'm the sole decision-maker in my coaching business", value: "sole_decision", qualifies: true },
@@ -44,10 +44,10 @@ export const questions: Question[] = [
         ]
     },
     {
-        id: 3,
-        text: "Which of these problems do you most relate to? (Select all that apply)",
+        id: 5,
+        text: "Which of these problems within your business do you most relate to? (Select all that apply)",
         options: [
-            { text: "I fall behind on replying to client emails and DMs", value: "email_behind", points: 1 },
+            { text: "I fall behind on replying to client emails", value: "email_behind", points: 1 },
             { text: "I lose track of client engagement and drop-offs", value: "lose_track", points: 1 },
             { text: "I forget to follow up with leads who ghosted", value: "no_followup", points: 1 },
             { text: "I post inconsistently because content creation burns me out", value: "content_burnout", points: 1 },
@@ -56,35 +56,36 @@ export const questions: Question[] = [
         multiSelect: true
     },
     {
-        id: 4,
-        text: "Which feels more true?",
-        options: [
-            { text: "I need more leads", value: "need_leads" },
-            { text: "I need better systems to keep up with demand", value: "need_systems" },
-            { text: "I need both", value: "need_both" },
-            { text: "I'm not sure", value: "not_sure" }
-        ]
-    },
-    {
-        id: 5,
+        id: 6,
         text: "What's your biggest focus over the next 90 days?",
         options: [
-            { text: "Scaling revenue without burning out", value: "scale_revenue", qualifies: true },
+            { text: "Scaling without burning out", value: "scale_revenue", qualifies: true },
             { text: "Hiring more team members", value: "hire_team", qualifies: true },
             { text: "Fixing client fulfillment & retention", value: "fix_retention", qualifies: true },
             { text: "Getting more leads", value: "get_leads", qualifies: true },
-            { text: "Just maintaining what I have", value: "maintain", points: -1 }
+            { text: "Just maintaining what I have", value: "maintain", disqualifies: true }
         ]
     },
     {
-        id: 6,
-        text: "If we could help you plug in AI agents that save 10+ hours/week and improve client retention without hiring, how interested would you be?",
+        id: 7,
+        text: "Which system do you need most right now? (Select all that apply)",
+        options: [
+            { text: "A system to reply to client emails", value: "client_email" },
+            { text: "A system to follow up with leads", value: "lead_followup" },
+            { text: "A system to check in with clients and keep them engaged", value: "retention_agent" },
+            { text: "A system to send me content ideas that perform", value: "content_agent" },
+            { text: "A system to capture leads & book calls on autopilot", value: "coach_assistant" },
+        ]
+    },
+    {
+        id: 8,
+        text: "If we could help you plug in AI agents that save 10+ hours/week and improve client retention without hiring another VA, how interested would you be?",
         subtitle: "(Scale: Not Interested – Somewhat Interested – Very Interested – I want this yesterday)",
         options: [
-            { text: "Not Interested", value: "not_interested", points: 0 },
-            { text: "Somewhat Interested", value: "somewhat", points: 1 },
             { text: "Very Interested", value: "very", points: 2 },
-            { text: "I want this yesterday", value: "want_now", points: 3 }
+            { text: "Somewhat Interested", value: "somewhat", points: 1 },
+            { text: "Not Interested", value: "not_interested", disqualifies: true },
+            // { text: "I want this yesterday", value: "want_now", points: 3 }
         ]
     }
 ];
