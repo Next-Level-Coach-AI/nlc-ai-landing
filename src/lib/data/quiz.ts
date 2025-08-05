@@ -75,7 +75,8 @@ export const questions: Question[] = [
             { text: "A system to check in with clients and keep them engaged", value: "retention_agent" },
             { text: "A system to send me content ideas that perform", value: "content_agent" },
             { text: "A system to capture leads & book calls on autopilot", value: "coach_assistant" },
-        ]
+        ],
+        multiSelect: true
     },
     {
         id: 8,
@@ -91,23 +92,34 @@ export const questions: Question[] = [
 ];
 
 export const calculateQualification = (answers: Answers): boolean => {
-    if (answers[1] === 'under5k') return false;
-    if (answers[2] === 'support_staff' || answers[2] === 'freelancer') return false;
-    if (answers[3] && answers[3].includes('no_problems')) return false;
+    let disqualifyingAnswers = 0;
 
-    let points = 0;
-    if (answers[3]) {
-        points += (answers[3] as string[]).filter(a => a !== 'no_problems').length;
-    }
-    if (answers[6]) {
-        const interestPoints = {
-            'not_interested': 0,
-            'somewhat': 1,
-            'very': 2,
-            'want_now': 3
-        };
-        points += interestPoints[answers[6] as keyof typeof interestPoints] || 0;
-    }
+    // Check each answer for disqualifying responses
+    Object.entries(answers).forEach(([questionID, answer]) => {
+        const question = questions.find(q => q.id === parseInt(questionID));
+        if (!question) return;
 
-    return points >= 3;
+        if (Array.isArray(answer)) {
+            // Multi-select question
+            answer.forEach(value => {
+                // Handle "other: text" format
+                const cleanValue = value.startsWith('other:') ? 'other' : value;
+                const option = question.options.find(opt => opt.value === cleanValue);
+                if (option?.disqualifies) {
+                    disqualifyingAnswers++;
+                }
+            });
+        } else {
+            // Single select question
+            // Handle "other: text" format
+            const cleanValue = answer.startsWith('other:') ? 'other' : answer;
+            const option = question.options.find(opt => opt.value === cleanValue);
+            if (option?.disqualifies) {
+                disqualifyingAnswers++;
+            }
+        }
+    });
+
+    // Coach is disqualified only if they have 3 or more disqualifying answers
+    return disqualifyingAnswers < 3;
 };
