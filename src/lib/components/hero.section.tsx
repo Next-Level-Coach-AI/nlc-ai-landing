@@ -102,7 +102,7 @@ export const HeroSection: FC<HeroSectionProps> = ({ onStartQuiz }) => {
                         {/* Subtitle */}
                         <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed font-poppins">
                             AI Agents designed for you that handle client emails, content creation, client
-                            retention, lead qualifiers and lead follow-ups — so you don't have to!
+                            retention, lead qualifiers and lead follow-ups, so you don't have to!
                         </p>
 
                         {/* Video Demo Placeholder with Glow Orbs and Animated Borders */}

@@ -4,7 +4,7 @@ export const ExclusiveAccessSection = () => {
             <div className="text-center max-w-5xl mx-auto">
                 {/* Main Headline */}
                 <h2 className="text-4xl md:text-5xl font-bold mb-4 font-poppins leading-tight">
-                    <span className="text-white">Only 100 Coaches Will Get In —</span>
+                    <span className="text-white">Only 100 Coaches Will Get In.</span>
                 </h2>
                 <h3 className="text-4xl md:text-5xl font-bold mb-8 font-poppins leading-tight">
                   <span className="bg-gradient-to-t from-purple-300 via-fuchsia-400 to-fuchsia-900 bg-clip-text text-transparent">
@@ -28,8 +28,7 @@ export const ExclusiveAccessSection = () => {
                         </h4>
 
                         <p className="text-lg md:text-xl mb-8 text-gray-300 font-poppins leading-relaxed">
-                            Only the first 100 coaches who qualify will be granted access to our private AI Vault
-                            — a behind-the-scenes community where you'll
+                            Only the first 100 coaches who qualify will be granted access to our private AI Vault, a behind-the-scenes community where you'll
                         </p>
 
                         {/* Three Benefits Grid */}

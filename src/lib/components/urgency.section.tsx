@@ -1,46 +1,3 @@
-const DownArrow = ({ className = '', width = 4, height = 120, color = '#FFF' }) => {
-  const half = width / 2;
-  const markerId = 'arrowhead';
-  const markerSize = width * 2;
-  return (
-    <svg
-      className={className}
-      width={width}
-      height={height}
-      viewBox={`0 0 ${width} ${height}`}
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      overflow="visible"
-    >
-      <defs>
-        <marker
-          id={markerId}
-          markerWidth={markerSize}
-          markerHeight={markerSize}
-          refX={markerSize / 2}
-          refY={markerSize / 2}
-          orient="auto"
-        >
-          <polygon
-            points={`0,0 ${markerSize},${markerSize/2} 0,${markerSize}`}
-            fill={color}
-          />
-        </marker>
-      </defs>
-      <line
-        x1={half}
-        y1={0}
-        x2={half}
-        y2={height - markerSize / 2}
-        stroke={color}
-        strokeWidth={width}
-        strokeLinecap="round"
-        markerEnd={`url(#${markerId})`}
-      />
-    </svg>
-  );
-};
-
 export const UrgencySection = () => {
     return (
         <div className={"container mx-auto px-6 py-10"}>
@@ -48,7 +5,7 @@ export const UrgencySection = () => {
                 <p className="text-xl md:text-2xl font-semibold text-fuchsia-50 font-poppins block sm:hidden">
                     Take the quiz below to access the AI Vault.
                 </p>
-                <div className="text-center my-6">
+                <div className="text-center my-6 sm:hidden">
                     <span className="text-white text-2xl">↓</span>
                 </div>
                 <div className="w-full sm:w-1/2">

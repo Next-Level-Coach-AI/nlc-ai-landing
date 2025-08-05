@@ -23,7 +23,7 @@ export const QuizCTASection: FC<QuizCTASectionProps> = ({ onStartQuiz }) => {
 
                         <p className="text-lg md:text-xl text-gray-300 mb-12 leading-relaxed font-poppins max-w-3xl mx-auto">
                             Discover where your coaching business is bleeding time, dropping clients, and
-                            how AI could boost your income — without hiring another team member.
+                            how AI could boost your income, without hiring another team member.
                         </p>
 
                         <button
