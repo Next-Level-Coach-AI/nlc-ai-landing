@@ -62,17 +62,12 @@ export const AnimatedDots: React.FC = () => {
     );
 };
 
-export const GlowOrbs: React.FC = () => {
-    return (
-        <>
-            {/* Large gradient blurs for atmosphere */}
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-fuchsia-600/20 via-purple-600/20 to-violet-600/20 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-violet-600/20 via-purple-600/20 to-fuchsia-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-            <div className="absolute top-1/2 left-0 w-64 h-64 bg-gradient-to-r from-purple-600/15 via-fuchsia-600/15 to-violet-600/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
-            <div className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-r from-fuchsia-600/15 via-purple-600/15 to-violet-600/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        </>
-    );
-};
+export const GlowOrbs: React.FC = () => (
+  <>
+    <div className="fixed top-0 right-0 w-96 h-96 bg-gradient-to-r from-fuchsia-600/20 via-purple-600/20 to-violet-600/20 rounded-full blur-3xl animate-pulse"></div>
+    <div className="fixed bottom-0 left-0 w-96 h-96 bg-gradient-to-r from-violet-600/20 via-purple-600/20 to-fuchsia-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+  </>
+);
 
 export const PageBackground: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
