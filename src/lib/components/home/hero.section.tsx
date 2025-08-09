@@ -13,15 +13,15 @@ export const HeroSection = () => {
 
                 <div className="container mx-auto px-6 pt-24">
                     <div className="text-center max-w-6xl mx-auto">
-                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-poppins mb-6 leading-tight">
+                        <h1 className="text-[40px] md:text-6xl lg:text-[76px] font-bold mb-6 leading-tight">
                             <span className="text-white">Your Coaching Business.</span>
                             <br />
-                            <span className="bg-gradient-to-t from-fuchsia-200 via-fuchsia-600 to-purple-900 bg-clip-text text-transparent">
+                            <span className="text-primary">
                               On Autopilot.
                             </span>
                         </h1>
 
-                        <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed font-poppins">
+                        <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
                             AI Agents designed for you that handle client emails, content creation, client
                             retention, lead qualifiers and lead follow-ups, so you don't have to!
                         </p>
@@ -45,7 +45,7 @@ export const HeroSection = () => {
                                                 <path d="M8 5v14l11-7z"/>
                                             </svg>
                                         </div>
-                                        <p className="text-gray-300 font-poppins">Watch Demo</p>
+                                        <p className="text-gray-300">Watch Demo</p>
                                     </div>
 
                                     <div className="absolute inset-0 opacity-10">

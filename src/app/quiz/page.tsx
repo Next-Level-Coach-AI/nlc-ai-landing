@@ -170,12 +170,12 @@ const QuizPage = () => {
                                     })}
                                 </div>
 
-                                <h2 className="text-3xl md:text-3xl font-bold mb-4 font-poppins text-white">{currentQ?.text}</h2>
+                                <h2 className="text-3xl md:text-3xl font-bold mb-4 text-white">{currentQ?.text}</h2>
                                 {currentQ?.subtitle && (
-                                    <p className="text-white/70 text-lg font-poppins">{currentQ?.subtitle}</p>
+                                    <p className="text-white/70 text-lg">{currentQ?.subtitle}</p>
                                 )}
                                 {currentQ?.multiSelect && (
-                                    <p className="text-base text-purple-300 mt-4 font-poppins">Select all that apply</p>
+                                    <p className="text-base text-purple-300 mt-4">Select all that apply</p>
                                 )}
                             </div>
 
@@ -189,7 +189,7 @@ const QuizPage = () => {
                                         <button
                                             key={index}
                                             onClick={() => handleAnswer(currentQ?.id, option, currentQ?.multiSelect)}
-                                            className={`w-full p-6 cursor-pointer rounded-2xl border-2 transition-all duration-300 text-left font-poppins ${
+                                            className={`w-full p-6 cursor-pointer rounded-2xl border-2 transition-all duration-300 text-left ${
                                                 isSelected
                                                     ? 'border-purple-400 bg-gradient-to-r from-purple-500/20 to-fuchsia-500/20 text-white'
                                                     : 'border-gray-700 bg-black/20 hover:border-purple-400/50 hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-fuchsia-500/10 text-white/80'
@@ -219,14 +219,14 @@ const QuizPage = () => {
                             {/* Other text input */}
                             {showOtherInput && hasOtherSelected && (
                                 <div className="mt-6">
-                                    <label className="block text-lg font-medium mb-3 font-poppins text-white">
+                                    <label className="block text-lg font-medium mb-3 text-white">
                                         Please specify:
                                     </label>
                                     <input
                                         type="text"
                                         value={otherText}
                                         onChange={(e) => setOtherText(e.target.value)}
-                                        className="w-full px-6 py-4 rounded-xl bg-black/30 border border-gray-700 focus:border-purple-400 focus:outline-none text-white placeholder-white/50 font-poppins"
+                                        className="w-full px-6 py-4 rounded-xl bg-black/30 border border-gray-700 focus:border-purple-400 focus:outline-none text-white placeholder-white/50"
                                         placeholder="Enter your answer..."
                                         autoFocus
                                     />
@@ -238,7 +238,7 @@ const QuizPage = () => {
                                     <button
                                         onClick={showOtherInput && hasOtherSelected ? handleNextWithOther : handleNextMultiSelect}
                                         disabled={!canProceed}
-                                        className="bg-gradient-to-t from-fuchsia-200 via-fuchsia-600 to-purple-700 hover:from-fuchsia-300 hover:via-fuchsia-700 hover:to-purple-800 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-2 px-8 rounded-lg transition-all duration-300 font-poppins text-lg"
+                                        className="bg-gradient-to-t from-fuchsia-200 via-fuchsia-600 to-purple-700 hover:from-fuchsia-300 hover:via-fuchsia-700 hover:to-purple-800 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-2 px-8 rounded-lg transition-all duration-300 text-lg"
                                     >
                                         Next Step <ChevronRight className="inline ml-2 w-5 h-5" />
                                     </button>

@@ -27,6 +27,13 @@ body {
   transition: all 0.2s ease;
 }
 
+.text-primary {
+    background: linear-gradient(5.46deg, #FEBEFA 10.93%, #B339D4 36.68%, #7B21BA 60.9%, #7B26F0 88.16%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
 .btn-primary {
     background: linear-gradient(19deg, #FEBEFA 6.78%, #B339D4 34.87%, #7B21BA 61.32%, #7B26F0 91.07%);
     cursor: pointer;

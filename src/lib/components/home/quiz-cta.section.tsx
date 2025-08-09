@@ -13,14 +13,18 @@ export const QuizCTASection: FC<QuizCTASectionProps> = ({ onStartQuiz }) => {
                     <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-r from-fuchsia-600/10 via-purple-600/10 to-violet-600/10 rounded-full blur-3xl"></div>
 
                     <div className="relative z-10 text-center">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-6 font-poppins">
-                            <span className="text-white">What's Your </span>
-                            <span className="bg-gradient-to-r from-purple-300 via-purple-400 to-fuchsia-300 bg-clip-text text-transparent">
-                                AI Automation Score?
+                        <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                            <span className="text-white">
+                                What's Your <span className={"text-primary"}>AI</span>
+                                <span className={"hidden sm:inline"}>{" "}</span>
+                                <br className="sm:hidden" />
+                            </span>
+                            <span className="text-primary">
+                                Automation<br className="sm:hidden" /> Score?
                             </span>
                         </h2>
 
-                        <p className="text-lg md:text-xl text-gray-300 mb-12 leading-relaxed font-poppins max-w-3xl mx-auto">
+                        <p className="text-lg md:text-xl text-gray-300 mb-12 leading-relaxed max-w-3xl mx-auto">
                             Discover where your coaching business is bleeding time, dropping clients, and
                             how AI could boost your income, without hiring another team member.
                         </p>
@@ -35,7 +39,7 @@ export const QuizCTASection: FC<QuizCTASectionProps> = ({ onStartQuiz }) => {
                     </div>
                 </div>
                 <div className="flex justify-center w-full sm:hidden">
-                    <img src={"/images/bg/urgency-bg.png"} alt="" />
+                    <img src={"/images/bg/urgency-large-bg.png"} alt="" />
                 </div>
             </div>
         </div>
