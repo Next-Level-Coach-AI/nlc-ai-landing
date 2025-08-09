@@ -123,7 +123,6 @@ const QuizPage = () => {
             <div className="container mx-auto px-6 py-20">
                 <div className="max-w-3xl mx-auto">
                     <div className="glass-card rounded-3xl p-8 md:p-12 border border-purple-500/20 relative overflow-hidden">
-                        {/* Background glow effects */}
                         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-l from-purple-600/10 via-fuchsia-600/10 to-violet-600/10 rounded-full blur-3xl"></div>
 
                         <div className="relative z-10">
@@ -170,7 +169,7 @@ const QuizPage = () => {
                                     })}
                                 </div>
 
-                                <h2 className="text-3xl md:text-3xl font-bold mb-4 text-white">{currentQ?.text}</h2>
+                                <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">{currentQ?.text}</h2>
                                 {currentQ?.subtitle && (
                                     <p className="text-white/70 text-lg">{currentQ?.subtitle}</p>
                                 )}
@@ -209,14 +208,13 @@ const QuizPage = () => {
                                                         {isSelected && <div className="w-3 h-3 bg-purple-500 rounded-full" />}
                                                     </div>
                                                 )}
-                                                <span className="text-lg">{option.text}</span>
+                                                <span className="max-w-8/12 text-md sm:text-lg">{option.text}</span>
                                             </div>
                                         </button>
                                     );
                                 })}
                             </div>
 
-                            {/* Other text input */}
                             {showOtherInput && hasOtherSelected && (
                                 <div className="mt-6">
                                     <label className="block text-lg font-medium mb-3 text-white">

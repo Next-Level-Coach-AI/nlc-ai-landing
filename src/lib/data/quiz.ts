@@ -81,7 +81,7 @@ export const questions: Question[] = [
     {
         id: 8,
         text: "If we could help you plug in AI agents that save 10+ hours/week and improve client retention without hiring another VA, how interested would you be?",
-        subtitle: "(Scale: Not Interested – Somewhat Interested – Very Interested – I want this yesterday)",
+        // subtitle: "(Scale: Not Interested – Somewhat Interested – Very Interested – I want this yesterday)",
         options: [
             { text: "Very Interested", value: "very", points: 2 },
             { text: "Somewhat Interested", value: "somewhat", points: 1 },
