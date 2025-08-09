@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Poppins } from "next/font/google";
 import {ReactNode} from "react";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const poppins = Poppins({
+    weight: ['600'],
+    subsets: ['latin'],
+    display: 'swap',
+})
 
 export const metadata: Metadata = {
     title: "Next Level Coach AI - Exclusive Access",
@@ -36,9 +32,7 @@ export default function RootLayout({
         <link rel="icon" href="/images/icon.svg" type="image/svg" sizes="any"/>
         <link rel="apple-touch-icon" href="/images/apple-icon.png" type="image/png" sizes="any"/>
     </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${poppins.className} antialiased`}>
         {children}
       </body>
     </html>

@@ -19,7 +19,7 @@ const Home = () => {
 
   return (
       <PageBackground>
-        <HeroSection onStartQuiz={handleStartQuiz} />
+        <HeroSection />
         <ExclusiveAccessSection />
         <UrgencySection />
         <QuizCTASection onStartQuiz={handleStartQuiz} />
