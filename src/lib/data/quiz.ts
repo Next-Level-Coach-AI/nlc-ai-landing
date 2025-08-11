@@ -1,4 +1,4 @@
-import {Answers, Question} from "@/lib/types/quiz";
+import {Question} from "@/lib/types";
 
 export const questions: Question[] = [
     {
@@ -90,36 +90,3 @@ export const questions: Question[] = [
         ]
     }
 ];
-
-export const calculateQualification = (answers: Answers): boolean => {
-    let disqualifyingAnswers = 0;
-
-    // Check each answer for disqualifying responses
-    Object.entries(answers).forEach(([questionID, answer]) => {
-        const question = questions.find(q => q.id === parseInt(questionID));
-        if (!question) return;
-
-        if (Array.isArray(answer)) {
-            // Multi-select question
-            answer.forEach(value => {
-                // Handle "other: text" format
-                const cleanValue = value.startsWith('other:') ? 'other' : value;
-                const option = question.options.find(opt => opt.value === cleanValue);
-                if (option?.disqualifies) {
-                    disqualifyingAnswers++;
-                }
-            });
-        } else {
-            // Single select question
-            // Handle "other: text" format
-            const cleanValue = answer.startsWith('other:') ? 'other' : answer;
-            const option = question.options.find(opt => opt.value === cleanValue);
-            if (option?.disqualifies) {
-                disqualifyingAnswers++;
-            }
-        }
-    });
-
-    // Coach is disqualified only if they have 3 or more disqualifying answers
-    return disqualifyingAnswers < 3;
-};

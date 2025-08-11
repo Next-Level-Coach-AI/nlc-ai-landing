@@ -6,7 +6,15 @@ import { ChevronRight, CheckCircle } from 'lucide-react';
 import { PageBackground } from '@/lib/components';
 import { type Answers, type QuestionOption } from '@/lib/types';
 import { questions } from "@/lib/data";
+import {hashString} from "@/lib/utils";
 
+
+const persistAnswersWithHash = (answers: Answers) => {
+    const serialized = JSON.stringify(answers);
+    const checksum = hashString(serialized);
+    sessionStorage.setItem('quizAnswers', serialized);
+    sessionStorage.setItem('quizAnswersHash', checksum);
+};
 
 const QuizPage = () => {
     const router = useRouter();
@@ -59,11 +67,10 @@ const QuizPage = () => {
                     setShowOtherInput(false);
                     setOtherText('');
                 } else {
-                    // Store answers in sessionStorage and navigate to lead form
-                    sessionStorage.setItem('quizAnswers', JSON.stringify({
+                    persistAnswersWithHash({
                         ...answers,
                         [questionID]: option.value
-                    }));
+                    });
                     router.push('/lead-form');
                 }
             }, 500);
@@ -76,8 +83,7 @@ const QuizPage = () => {
             setShowOtherInput(false);
             setOtherText('');
         } else {
-            // Store answers in sessionStorage and navigate to lead form
-            sessionStorage.setItem('quizAnswers', JSON.stringify(answers));
+            persistAnswersWithHash(answers);
             router.push('/lead-form');
         }
     };
@@ -103,8 +109,8 @@ const QuizPage = () => {
             setShowOtherInput(false);
             setOtherText('');
         } else {
-            // Store answers in sessionStorage and navigate to lead form
-            sessionStorage.setItem('quizAnswers', JSON.stringify(updatedAnswers));
+            // Store answers + hash in sessionStorage and navigate to lead form
+            persistAnswersWithHash(updatedAnswers);
             router.push('/lead-form');
         }
     };
@@ -197,13 +203,13 @@ const QuizPage = () => {
                                             <div className="flex items-center">
                                                 <div>
                                                     {currentQ?.multiSelect ? (
-                                                        <div className={`w-4 sm:w-6 h-4 sm:h-6 rounded-full border-2 mr-4 flex items-center justify-center ${
+                                                        <div className={`w-5 sm:w-6 h-5 sm:h-6 rounded-full border-2 mr-4 flex items-center justify-center ${
                                                             isSelected ? 'bg-purple-600 border-purple-400' : 'border-gray-500'
                                                         }`}>
                                                             {isSelected && <CheckCircle className="w-4 h-4 text-white" />}
                                                         </div>
                                                     ) : (
-                                                        <div className={`w-6 h-6 rounded-full border-2 mr-4 flex items-center justify-center ${
+                                                        <div className={`w-5 sm:w-6 h-5 sm:h-6 rounded-full border-2 mr-4 flex items-center justify-center ${
                                                             isSelected ? 'border-purple-400' : 'border-gray-500'
                                                         }`}>
                                                             {isSelected && <div className="w-3 h-3 bg-purple-500 rounded-full" />}
