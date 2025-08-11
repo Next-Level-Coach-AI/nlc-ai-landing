@@ -51,7 +51,7 @@ export const questions: Question[] = [
             { text: "I lose track of client engagement and drop-offs", value: "lose_track", points: 1 },
             { text: "I forget to follow up with leads who ghosted", value: "no_followup", points: 1 },
             { text: "I post inconsistently because content creation burns me out", value: "content_burnout", points: 1 },
-            { text: "None of these — my systems are running smoothly", value: "no_problems", disqualifies: true }
+            { text: "None of these. My systems are running smoothly", value: "no_problems", disqualifies: true }
         ],
         multiSelect: true
     },

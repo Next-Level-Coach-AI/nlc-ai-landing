@@ -7,10 +7,7 @@ import Image from "next/image";
 import { SiX, SiInstagram, SiTiktok, SiYoutube } from 'react-icons/si';
 
 const RejectedScreen = () => (
-    <div>
-        <div className="mx-auto mb-6 w-16 h-auto">
-            <Image src={'/images/logo.png'} height={48} width={48} alt={'Logo'}/>
-        </div>
+    <>
         <h2 className="text-[40px] sm:text-[45px] font-semibold text-[#FF3E14] mb-6">
             You Didn't Qualify — Yet
         </h2>
@@ -37,14 +34,11 @@ const RejectedScreen = () => (
                 <SiYoutube size={24} color="#FFFFFF" />
             </a>
         </div>
-    </div>
+    </>
 );
 
 const QualifiedScreen = () => (
-    <div>
-        <div className="flex justify-center mb-6 w-full" >
-            <Image src={'/images/logo.png'} height={57} width={67} alt={'Logo'}/>
-        </div>
+    <>
         <h2 className="text-[40px] sm:text-5xl font-semibold text-white mb-2">
             You Qualify
         </h2>
@@ -62,8 +56,8 @@ const QualifiedScreen = () => (
         </p>
         <p className="text-lg bg-clip-text text-transparent bg-gradient-to-t from-fuchsia-200 via-fuchsia-400 to-purple-600 mb-8">Let's make it count!</p>
 
-        <div className="bg-[#171717] p-1 rounded-2xl mb-8">
-            <div className="bg-black/40 rounded-xl px-8 py-6">
+        <div className="bg-[#171717] border-qualified p-1 rounded-xl mb-8">
+            <div className="rounded-xl px-8 py-6">
                 <h3 className="text-2xl font-semibold mb-2 text-white">AI‑Ready Coach</h3>
                 <p className="text-[16px] sm:text-lg text-white/80">
                     Eligible for the AI Vault + Be the first to access the software
@@ -74,7 +68,7 @@ const QualifiedScreen = () => (
         <button className="bg-gradient-to-t from-fuchsia-200 via-fuchsia-600 to-purple-700 hover:from-fuchsia-300 hover:via-fuchsia-700 hover:to-purple-800 cursor-pointer text-white font-semibold py-3 px-12 rounded-lg text-xl transition-all duration-300 transform hover:scale-105">
             Join The AI Vault Now
         </button>
-    </div>
+    </>
 );
 
 const ResultsPage = () => {
@@ -83,12 +77,10 @@ const ResultsPage = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Get qualification status from sessionStorage
         const storedQualified = sessionStorage.getItem('qualified');
         const storedLeadInfo = sessionStorage.getItem('leadInfo');
 
         if (!storedQualified || !storedLeadInfo) {
-            // Redirect back to quiz if no data found
             router.push('/quiz');
             return;
         }
@@ -113,19 +105,23 @@ const ResultsPage = () => {
 
     return (
         <PageBackground>
-            {/* Full-page background glows */}
-            <div className="glow-orb glow-orb--xl -top-40 -left-40 sm:-top-56 sm:-left-56" />
-            <div className="glow-orb glow-orb--lg glow-orb--purple -bottom-32 -right-40 sm:-bottom-40 sm:-right-56 opacity-80" />
-            <div className="glow-orb glow-orb--md top-1/3 -left-20 sm:left-10 opacity-60" />
+            <div className="glow-orb glow-orb--xxl -top-72 -right-72 sm:-top-96 sm:-right-96 opacity-70" />
+            <div className="glow-orb glow-orb--xxl glow-orb--purple -bottom-72 -left-72 sm:-bottom-96 sm:-left-96 opacity-70" />
 
             <div className="container mx-auto px-6 py-10 relative z-10">
                 <div className="max-w-3xl mx-auto text-center">
                     <div className="glass-card rounded-3xl p-8 md:p-12 border border-purple-500/20 relative overflow-hidden">
-                        {/* Card-local subtle glow for extra depth (kept but toned down) */}
                         <div className="glow-orb glow-orb--md -top-24 -left-28 sm:-top-28 sm:-left-24 opacity-60" />
                         <div className="glow-orb glow-orb--sm glow-orb--purple -bottom-16 -right-20 opacity-50" />
                         <div className="relative z-10">
-                            {qualified ? <QualifiedScreen/> : <RejectedScreen />}
+                            <div>
+                                <div className="flex justify-center mb-6 w-full" >
+                                    <Image src={'/images/logo.png'} height={57} width={67} alt={'Logo'}
+                                           className={"cursor-pointer"}
+                                           onClick={() => router.push('/')}/>
+                                </div>
+                                {qualified ? <QualifiedScreen/> : <RejectedScreen />}
+                            </div>
                         </div>
                     </div>
                 </div>

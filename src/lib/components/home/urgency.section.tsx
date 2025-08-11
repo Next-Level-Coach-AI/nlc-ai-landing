@@ -13,10 +13,10 @@ export const UrgencySection = () => {
 
                 <div className="flex flex-col sm:flex-row items-center">
                     <div className="flex-1 text-center sm:text-left sm:-ml-10">
-                        <h2 className="text-4xl sm:text-5xl font-bold mb-6 leading-tight">
-                            <span className="text-white">Once the 100 spots are gone</span>
+                        <h2 className="text-4xl sm:text-[45px] font-bold mb-6 leading-tight w-auto sm:w-2xl">
+                            <span className="text-white">Once the 100 spots are gone, </span>
                             <br className={"hidden sm:block"} />
-                            <span className="text-primary">— they're gone for good.</span>
+                            <span className="text-primary">they're gone for good.</span>
                         </h2>
 
                         <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto sm:mx-0">

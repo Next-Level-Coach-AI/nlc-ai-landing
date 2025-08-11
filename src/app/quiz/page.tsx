@@ -169,7 +169,7 @@ const QuizPage = () => {
                                     })}
                                 </div>
 
-                                <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">{currentQ?.text}</h2>
+                                <h2 className="text-[20px] sm:text-3xl font-bold mb-4 text-white">{currentQ?.text}</h2>
                                 {currentQ?.subtitle && (
                                     <p className="text-white/70 text-lg">{currentQ?.subtitle}</p>
                                 )}
@@ -188,27 +188,29 @@ const QuizPage = () => {
                                         <button
                                             key={index}
                                             onClick={() => handleAnswer(currentQ?.id, option, currentQ?.multiSelect)}
-                                            className={`w-full p-6 cursor-pointer rounded-2xl border-2 transition-all duration-300 text-left ${
+                                            className={`w-full p-3 sm:p-6 cursor-pointer rounded-2xl border-2 transition-all duration-300 text-left ${
                                                 isSelected
                                                     ? 'border-purple-400 bg-gradient-to-r from-purple-500/20 to-fuchsia-500/20 text-white'
                                                     : 'border-gray-700 bg-black/20 hover:border-purple-400/50 hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-fuchsia-500/10 text-white/80'
                                             }`}
                                         >
                                             <div className="flex items-center">
-                                                {currentQ?.multiSelect ? (
-                                                    <div className={`w-6 h-6 rounded border-2 mr-4 flex items-center justify-center ${
-                                                        isSelected ? 'bg-purple-600 border-purple-400' : 'border-gray-500'
-                                                    }`}>
-                                                        {isSelected && <CheckCircle className="w-4 h-4 text-white" />}
-                                                    </div>
-                                                ) : (
-                                                    <div className={`w-6 h-6 rounded-full border-2 mr-4 flex items-center justify-center ${
-                                                        isSelected ? 'border-purple-400' : 'border-gray-500'
-                                                    }`}>
-                                                        {isSelected && <div className="w-3 h-3 bg-purple-500 rounded-full" />}
-                                                    </div>
-                                                )}
-                                                <span className="max-w-8/12 text-md sm:text-lg">{option.text}</span>
+                                                <div>
+                                                    {currentQ?.multiSelect ? (
+                                                        <div className={`w-4 sm:w-6 h-4 sm:h-6 rounded-full border-2 mr-4 flex items-center justify-center ${
+                                                            isSelected ? 'bg-purple-600 border-purple-400' : 'border-gray-500'
+                                                        }`}>
+                                                            {isSelected && <CheckCircle className="w-4 h-4 text-white" />}
+                                                        </div>
+                                                    ) : (
+                                                        <div className={`w-6 h-6 rounded-full border-2 mr-4 flex items-center justify-center ${
+                                                            isSelected ? 'border-purple-400' : 'border-gray-500'
+                                                        }`}>
+                                                            {isSelected && <div className="w-3 h-3 bg-purple-500 rounded-full" />}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                <span className="max-w-11/12 sm:max-w-10/12 text-xs sm:text-[16px]">{option.text}</span>
                                             </div>
                                         </button>
                                     );

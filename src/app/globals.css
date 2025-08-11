@@ -124,14 +124,20 @@ body {
 }
 
 .border-qualified {
-    border: 1px solid transparent;
-    background-image: linear-gradient(
-            17.78deg,
-            rgba(254, 190, 250, 0.2) 17.09%,
-            rgba(179, 57, 212, 0.2) 56.18%,
-            rgba(123, 33, 186, 0.2) 92.97%,
-            rgba(123, 38, 240, 0.2) 100%
-    );
+    /* Create a curved (around corners) gradient border using layered backgrounds */
+    border: 1px solid transparent; /* needed so border-box layer shows as border */
+    background:
+        conic-gradient(
+            from 17.78deg,
+            rgba(254, 190, 250, 0.25) 0%,
+            rgba(179, 57, 212, 0.25) 35%,
+            rgba(123, 33, 186, 0.22) 70%,
+            rgba(123, 38, 240, 0.22) 100%
+        ) border-box,
+        /* inner fill matching the card background */
+        linear-gradient(#171717, #171717) padding-box;
+    /* Respect whatever rounded-* is applied on the element */
+    /* No border-image used, so the gradient can curve with the radius */
 }
 
 
@@ -159,6 +165,7 @@ body {
 .glow-orb--md { width: 340px; height: 340px; }
 .glow-orb--lg { width: 460px; height: 460px; }
 .glow-orb--xl { width: 720px; height: 720px; }
+.glow-orb--xxl { width: 1200px; height: 1200px; }
 
 /* Subtle darker purple accent */
 .glow-orb--purple {
