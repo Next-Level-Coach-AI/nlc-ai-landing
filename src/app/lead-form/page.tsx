@@ -65,7 +65,6 @@ const LeadFormPage = () => {
                     lead: leadInfo,
                     answers,
                     qualified: isQualified,
-                    source: 'Website',
                     submittedAt: new Date().toISOString()
                 })
             });
