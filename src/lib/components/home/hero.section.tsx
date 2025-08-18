@@ -1,13 +1,23 @@
 import Image from "next/image";
+import {redirect} from "next/navigation";
 
 export const HeroSection = () => {
+
     return (
         <>
-
             <div className="relative">
-                <div className="absolute top-6 left-0 sm:left-6 z-20 w-full sm:w-auto">
-                    <div className="flex items-center justify-center space-x-3">
+                <div className="absolute top-6 left-0 px-3 z-20 w-full">
+                    <div className="flex items-center justify-between w-full space-x-3">
                         <Image src={'/images/logo-large.png'} height={192} width={192} alt={'Logo'}/>
+                        <button onClick={() => {
+                            redirect(process.env.NEXT_PUBLIC_COACH_PLATFORM_URL || '');
+                        }} className="btn-primary">
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+
+                            <span className="relative z-10 flex items-center justify-center">
+                                Login →
+                            </span>
+                        </button>
                     </div>
                 </div>
 
