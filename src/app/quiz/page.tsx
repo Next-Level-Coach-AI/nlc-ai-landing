@@ -252,7 +252,7 @@ const QuizPage = () => {
                                     <button
                                         onClick={handlePrev}
                                         disabled={currentQuestion === 0}
-                                        className="border-2 border-gray-700 text-white/90 hover:text-white cursor-pointer hover:border-purple-400/60 disabled:opacity-50 disabled:cursor-not-allowed font-semibold py-2 px-6 rounded-lg transition-all duration-300"
+                                        className="border-2 border-gray-700 text-white/90 hover:text-white cursor-pointer hover:border-purple-400/60 disabled:opacity-50 disabled:cursor-not-allowed font-semibold py-2 px-6 rounded-lg transition-all duration-300 text-sm sm:text-lg"
                                     >
                                         <ChevronLeft className="inline mr-2 w-5 h-5"/> Previous
                                     </button>
@@ -262,7 +262,7 @@ const QuizPage = () => {
                                     <button
                                         onClick={showOtherInput && hasOtherSelected ? handleNextWithOther : handleNextMultiSelect}
                                         disabled={!canProceed}
-                                        className="bg-gradient-to-t from-fuchsia-200 via-fuchsia-600 to-purple-700 hover:from-fuchsia-300 hover:via-fuchsia-700 hover:to-purple-800 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-2 px-8 rounded-lg transition-all duration-300 text-lg"
+                                        className="bg-gradient-to-t from-fuchsia-200 via-fuchsia-600 to-purple-700 hover:from-fuchsia-300 hover:via-fuchsia-700 hover:to-purple-800 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-2 px-6 rounded-lg transition-all duration-300 text-sm sm:text-lg"
                                     >
                                         Next Step <ChevronRight className="inline ml-2 w-5 h-5" />
                                     </button>

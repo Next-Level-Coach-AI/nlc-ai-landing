@@ -87,7 +87,7 @@ const LeadFormPage = () => {
     return (
         <PageBackground>
             <div className="container mx-auto px-6 py-20">
-                <div className="max-w-2xl mx-auto">
+                <div className="max-w-3xl mx-auto">
                     <div className="glass-card rounded-3xl p-8 md:p-12 border border-purple-500/20 relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-l from-purple-600/10 via-fuchsia-600/10 to-violet-600/10 rounded-full blur-3xl"></div>
 
@@ -101,7 +101,7 @@ const LeadFormPage = () => {
                             <h2 className="text-xl sm:text-3xl font-bold mb-4 text-center text-white">
                                 See Your AI Automation Score
                             </h2>
-                            <p className="text-[16px] mb-12 text-center text-white/80">
+                            <p className="text-sm sm:text-[16px] mb-12 text-center text-white/80">
                                 Enter your details to see your personalized results and qualification status
                             </p>
 
