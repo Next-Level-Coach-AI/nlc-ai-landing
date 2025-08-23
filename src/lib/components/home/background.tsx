@@ -39,8 +39,10 @@ export const AnimatedDots: React.FC = () => {
                 y: Math.random() * 100,
                 size,
                 opacity: Math.random() * 0.5 + 0.3, // 0.3 – 0.8
-                speedX: (Math.random() - 0.5) * SPEED_RANGE,
-                speedY: (Math.random() - 0.5) * SPEED_RANGE,
+                // subtle horizontal drift
+                speedX: (Math.random() - 0.5) * (SPEED_RANGE * 0.3),
+                // always move upwards (negative Y). ensure a non-trivial speed
+                speedY: - (Math.random() * (SPEED_RANGE * 0.8) + SPEED_RANGE * 0.2),
                 node: document.createElement('div'),
             };
 

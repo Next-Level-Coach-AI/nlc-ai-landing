@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ChevronRight, CheckCircle } from 'lucide-react';
+import {ChevronRight, CheckCircle, ChevronLeft} from 'lucide-react';
 import { PageBackground } from '@/lib/components';
 import { type Answers, type QuestionOption } from '@/lib/types';
 import { questions } from "@/lib/data";
@@ -74,6 +74,14 @@ const QuizPage = () => {
                     router.push('/lead-form');
                 }
             }, 500);
+        }
+    };
+
+    const handlePrev = () => {
+        if (currentQuestion > 0) {
+            setCurrentQuestion(currentQuestion - 1);
+            setShowOtherInput(false);
+            setOtherText('');
         }
     };
 
@@ -239,8 +247,18 @@ const QuizPage = () => {
                                 </div>
                             )}
 
-                            {(currentQ?.multiSelect || showOtherInput) && (
-                                <div className="mt-12 text-center">
+                            <div className="mt-12 flex items-center justify-between">
+                                {currentQuestion > 0 && (
+                                    <button
+                                        onClick={handlePrev}
+                                        disabled={currentQuestion === 0}
+                                        className="border-2 border-gray-700 text-white/90 hover:text-white cursor-pointer hover:border-purple-400/60 disabled:opacity-50 disabled:cursor-not-allowed font-semibold py-2 px-6 rounded-lg transition-all duration-300"
+                                    >
+                                        <ChevronLeft className="inline mr-2 w-5 h-5"/> Previous
+                                    </button>
+                                )}
+
+                                {(currentQ?.multiSelect || showOtherInput) && (
                                     <button
                                         onClick={showOtherInput && hasOtherSelected ? handleNextWithOther : handleNextMultiSelect}
                                         disabled={!canProceed}
@@ -248,8 +266,8 @@ const QuizPage = () => {
                                     >
                                         Next Step <ChevronRight className="inline ml-2 w-5 h-5" />
                                     </button>
-                                </div>
-                            )}
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>

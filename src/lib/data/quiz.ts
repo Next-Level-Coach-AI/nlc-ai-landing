@@ -45,7 +45,7 @@ export const questions: Question[] = [
     },
     {
         id: 5,
-        text: "Which of these problems within your business do you most relate to? (Select all that apply)",
+        text: "Which of these problems within your business do you most relate to?",
         options: [
             { text: "I fall behind on replying to client emails", value: "email_behind", points: 1 },
             { text: "I lose track of client engagement and drop-offs", value: "lose_track", points: 1 },
@@ -68,7 +68,7 @@ export const questions: Question[] = [
     },
     {
         id: 7,
-        text: "Which system do you need most right now? (Select all that apply)",
+        text: "Which system do you need most right now?",
         options: [
             { text: "A system to reply to client emails", value: "client_email" },
             { text: "A system to follow up with leads", value: "lead_followup" },
