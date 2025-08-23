@@ -43,7 +43,7 @@ const ResultsPage = () => {
             <div className="glow-orb glow-orb--purple -bottom-72 -left-72 sm:-bottom-96 sm:-left-96 opacity-70" />
 
             <div className="container mx-auto px-6 py-10 relative z-10">
-                <div className="max-w-3xl mx-auto text-center">
+                <div className="max-w-4xl mx-auto text-center">
                     <div className="glass-card rounded-3xl p-8 md:p-12 border border-purple-500/20 relative overflow-hidden">
                         <div className="glow-orb glow-orb--md -top-24 -left-28 sm:-top-28 sm:-left-24 opacity-60" />
                         <div className="glow-orb glow-orb--sm glow-orb--purple -bottom-16 -right-20 opacity-50" />
