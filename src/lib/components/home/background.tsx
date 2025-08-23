@@ -14,43 +14,66 @@ const DOT_COUNT = 60
 const SPEED_RANGE = 8
 
 export const AnimatedDots: React.FC = () => {
-    const [dots, setDots] = useState<Dot[]>([]);
-
+    const containerRef = useRef<HTMLDivElement | null>(null);
     const rafId = useRef<number | null>(null);
     const lastTs = useRef<number | null>(null);
-    const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Many dots; adjust density as needed
+    const DOT_COUNT = 320;
+    const SPEED_RANGE = 14; // px per second in percentage units (~faster)
+
+    type LiveDot = Dot & { node: HTMLDivElement };
+    const liveDots = useRef<LiveDot[]>([]);
 
     useEffect(() => {
-        const initialDots: Dot[] = [];
+        const container = containerRef.current;
+        if (!container) return;
+
+        // Create dots imperatively for perf (avoid React re-render every frame)
+        const created: LiveDot[] = [];
         for (let i = 0; i < DOT_COUNT; i++) {
-            initialDots.push({
+            const size = Math.random() * 1 + 0.5; // 0.5px – 1.5px
+            const dot: LiveDot = {
                 id: i,
                 x: Math.random() * 100,
                 y: Math.random() * 100,
-                size: Math.random() * 3 + 1,
-                opacity: Math.random() * 0.3 + 0.1,
+                size,
+                opacity: Math.random() * 0.5 + 0.3, // 0.3 – 0.8
                 speedX: (Math.random() - 0.5) * SPEED_RANGE,
                 speedY: (Math.random() - 0.5) * SPEED_RANGE,
-            });
-        }
-        setDots(initialDots);
+                node: document.createElement('div'),
+            };
 
-        if (prefersReducedMotion) {
-            return;
+            const node = dot.node;
+            node.className = 'absolute rounded-full';
+            node.style.position = 'absolute';
+            node.style.left = `${dot.x}%`;
+            node.style.top = `${dot.y}%`;
+            node.style.width = `${dot.size}px`;
+            node.style.height = `${dot.size}px`;
+            node.style.opacity = `${dot.opacity}`;
+            node.style.background = '#ffffff'; // white dots
+            node.style.filter = 'blur(0.5px)';
+            node.style.willChange = 'left, top, transform';
+            node.style.transform = 'translateZ(0)';
+
+            container.appendChild(node);
+            created.push(dot);
         }
+        liveDots.current = created;
 
         const tick = (ts: number) => {
-            if (lastTs.current == null) {
-                lastTs.current = ts;
-            }
-            const dt = (ts - lastTs.current) / 1000
+            if (lastTs.current == null) lastTs.current = ts;
+            const dt = (ts - lastTs.current) / 1000; // seconds
             lastTs.current = ts;
 
-            setDots(prev => prev.map(dot => ({
-                ...dot,
-                x: (dot.x + dot.speedX * dt + 100) % 100,
-                y: (dot.y + dot.speedY * dt + 100) % 100,
-            })));
+            // update positions and apply styles directly
+            for (const d of liveDots.current) {
+                d.x = (d.x + d.speedX * dt + 100) % 100;
+                d.y = (d.y + d.speedY * dt + 100) % 100;
+                d.node.style.left = `${d.x}%`;
+                d.node.style.top = `${d.y}%`;
+            }
 
             rafId.current = requestAnimationFrame(tick);
         };
@@ -59,29 +82,22 @@ export const AnimatedDots: React.FC = () => {
 
         return () => {
             if (rafId.current != null) cancelAnimationFrame(rafId.current);
+            // Clean up DOM nodes
+            for (const d of liveDots.current) {
+                if (d.node && d.node.parentNode === container) {
+                    container.removeChild(d.node);
+                }
+            }
+            liveDots.current = [];
         };
     }, []);
 
     return (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {dots.map(dot => (
-                <div
-                    key={dot.id}
-                    className="absolute rounded-full"
-                    style={{
-                        left: `${dot.x}%`,
-                        top: `${dot.y}%`,
-                        width: `${dot.size}px`,
-                        height: `${dot.size}px`,
-                        opacity: dot.opacity,
-                        background: 'linear-gradient(135deg, #FEBEFA, #B339D4, #7B21BA)',
-                        filter: 'blur(1px)',
-                        willChange: 'left, top, transform',
-                        transform: 'translateZ(0)',
-                    }}
-                />
-            ))}
-        </div>
+        <div
+            ref={containerRef}
+            className="absolute inset-0 overflow-hidden pointer-events-none"
+            aria-hidden="true"
+        />
     );
 };
 
@@ -94,7 +110,7 @@ export const GlowOrbs: React.FC = () => (
 
 export const PageBackground: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
-        <div className="min-h-screen bg-black text-white overflow-hidden" style={{ background: '#070300' }}>
+        <div className="relative min-h-screen bg-black text-white overflow-hidden" style={{ background: '#070300' }}>
             <AnimatedDots />
 
             <GlowOrbs />
