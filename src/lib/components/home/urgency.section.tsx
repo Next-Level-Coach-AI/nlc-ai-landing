@@ -4,7 +4,7 @@ export const UrgencySection = () => {
             <div className="mx-auto max-w-5xl">
                 <div className="text-center mb-8">
                     <p className="text-3xl font-semibold text-fuchsia-50">
-                        Take the quiz below<br className="sm:hidden" /> to access the AI Vault.
+                        Take the quiz below<br className="sm:hidden" /> to access the <span className={"text-primary"}>AI Vault.</span>
                     </p>
                     <div className="text-center my-6">
                         <span className="text-white text-2xl">↓</span>
