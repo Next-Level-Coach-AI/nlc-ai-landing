@@ -68,15 +68,20 @@ const LeadFormPage = () => {
                     submittedAt: new Date().toISOString()
                 })
             });
-            if (!res.ok) {
-                const msg = await res.text().catch(() => '');
-                throw new Error(msg || `Submission failed with status ${res.status}`);
+            const data = await res.json();
+
+            if (!data.success) {
+                throw data.error.details.message;
             }
 
             sessionStorage.setItem('leadInfo', JSON.stringify(leadInfo));
             sessionStorage.setItem('qualified', JSON.stringify(isQualified));
             router.push('/results');
         } catch (e: any) {
+            console.log("Error: ", e);
+            if (typeof e === "string") {
+                return setSubmitError(e);
+            }
             const message = typeof e?.message === 'string' ? JSON.parse(e.message).message : '';
             setSubmitError(message || 'Something went wrong while submitting. Please try again.');
         } finally {
